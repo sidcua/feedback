@@ -71,7 +71,6 @@
             </div>
           </div>
         </div>
-        asdsad
       </div>
 @endsection
 @section('scripts')
