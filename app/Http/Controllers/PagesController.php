@@ -26,4 +26,8 @@ class PagesController extends Controller
     public function showDashboard() {
         return view('feedback.admin.dashboard');
     }
+
+    public function showEntity() {
+        return view('feedback.admin.entity');
+    }
 }

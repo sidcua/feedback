@@ -17,11 +17,11 @@ Route::middleware('guest')->group(function (){
 
     //Feedback
     Route::get('/', 'PagesController@showFeedbackForm');
-    Route::get('/office', 'PagesController@showOffice');
-    Route::get('/rate', 'PagesController@showRate');
-    Route::get('/success', 'PagesController@showSuccess');
-    Route::post('/office/select', 'FeedbackController@selectOffice');
-    Route::post('/submit', 'FeedbackController@submitFeedback');
+    Route::get('office', 'PagesController@showOffice');
+    Route::get('rate', 'PagesController@showRate');
+    Route::get('success', 'PagesController@showSuccess');
+    Route::post('office/select', 'FeedbackController@selectOffice');
+    Route::post('submit', 'FeedbackController@submitFeedback');
 });
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -37,8 +37,11 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 //Authenticated
 Route::middleware('auth')->group(function (){
-    Route::get('/admin/dashboard', 'PagesController@showDashboard');
-    Route::get('/admin/dashboard/overall', 'AdminController@overallRating');
-    Route::get('/admin/dashboard/byOffice', 'AdminController@byOfficeRating');
+    Route::prefix('admin')->group(function (){
+        Route::get('dashboard', 'PagesController@showDashboard');
+        Route::get('dashboard/overall', 'AdminController@overallRating');
+        Route::get('dashboard/byOffice', 'AdminController@byOfficeRating');
+        Route::get('entity', 'PagesController@showEntity');
+    });
 });
 
