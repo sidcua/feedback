@@ -7,29 +7,6 @@ use Auth;
 
 class PagesController extends Controller
 {
-    public function index(){
-        return view('homepage');
-    }
-
-    public function home(){
-        $type = Auth::user()->type;
-        if($type == 1){
-            $view = view('programmonitoring.dashboard');
-        }
-        else if($type == 2){
-            $view = view('programmonitoring.home');
-        }
-        return $view;
-    }
-
-    public function choice(){
-        return view('choice');
-    }
-
-    public function addPercentage($semester){
-        return view('percentage.add')->with('semester', $semester);
-    }
-
     public function showFeedbackForm(){
         return view('feedback.index');
     }
@@ -46,4 +23,7 @@ class PagesController extends Controller
         return view()->make('feedback.success');
     }
     
+    public function showDashboard() {
+        return view('feedback.admin.dashboard');
+    }
 }

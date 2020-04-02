@@ -6,7 +6,7 @@
         <div class="col-md-5">
             <form method="POST" action="{{ route('login') }}" style="margin-top: 100px;">
                 {{ csrf_field() }}
-                <p class="h2 text-center p-4">Program Monitoring</p>
+                <p class="h2 text-center p-4">Feedback Monitoring System</p>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Username</label>
                     <input id="email" name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required autofocus>

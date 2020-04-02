@@ -26,7 +26,7 @@
         $(document).ready(function(){
             $("#feedback-container").hide();
             $("#loader").show();
-            $("#feedback-container").load('/feedback/office', function(){
+            $("#feedback-container").load('/office', function(){
                 $("#loader").hide();
                 $("#feedback-container").show();
             });

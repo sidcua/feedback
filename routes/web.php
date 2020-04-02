@@ -11,22 +11,17 @@
 |
 */
 Route::middleware('guest')->group(function (){
-    Route::get('/', 'PagesController@index')->middleware('guest');
-
     //Login
-    Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-    Route::post('login', 'Auth\LoginController@login');
+    Route::get('admin', 'Auth\LoginController@showLoginForm')->name('login');
+    Route::post('admin', 'Auth\LoginController@login');
 
     //Feedback
-    Route::prefix('feedback')->group(function (){
-        Route::get('/', 'PagesController@showFeedbackForm');
-        Route::get('/office', 'PagesController@showOffice');
-        Route::get('/rate', 'PagesController@showRate');
-        Route::get('/success', 'PagesController@showSuccess');
-        Route::post('/office/select', 'FeedbackController@selectOffice');
-        Route::post('/submit', 'FeedbackController@submitFeedback');
-    });
-    
+    Route::get('/', 'PagesController@showFeedbackForm');
+    Route::get('/office', 'PagesController@showOffice');
+    Route::get('/rate', 'PagesController@showRate');
+    Route::get('/success', 'PagesController@showSuccess');
+    Route::post('/office/select', 'FeedbackController@selectOffice');
+    Route::post('/submit', 'FeedbackController@submitFeedback');
 });
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -42,19 +37,8 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 //Authenticated
 Route::middleware('auth')->group(function (){
-    Route::prefix('progmon')->group(function (){
-        //home
-        Route::get('/home', 'PagesController@home');
-
-        //Personnel Route Group
-        Route::middleware('personnel')->group(function (){
-            Route::get('/choice', 'PagesController@choice');
-            Route::get('/percentage/{semester}/add', 'PagesController@addPercentage');
-            Route::post('/percentage/{semester}/add/submit', 'PercentageController@submitPercentage');
-            Route::get('/list', 'PercentageController@listPercentage');
-            Route::delete('/list/delete', 'PercentageController@deletePercentage');
-        });
-    });
-    
+    Route::get('/admin/dashboard', 'PagesController@showDashboard');
+    Route::get('/admin/dashboard/overall', 'AdminController@overallRating');
+    Route::get('/admin/dashboard/byOffice', 'AdminController@byOfficeRating');
 });
 

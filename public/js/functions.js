@@ -54,14 +54,14 @@ function selectOffice(){
 	$("#feedback-container").hide();
 	$("#loader").show();
 	var form = $("#select-office-form").serialize();
-	ajaxPOST('/feedback/office/select', form, function(response){
+	ajaxPOST('/office/select', form, function(response){
 		if (response){
-			$("#feedback-container").load('/feedback/rate', function (){
+			$("#feedback-container").load('/rate', function (){
 				$("#loader").hide();
 				$("#feedback-container").show();
 			});
 		} else if (response) {
-			$("#feedback-container").load('/feedback/office', function (){
+			$("#feedback-container").load('/office', function (){
 				$("#loader").hide();
 				$("#feedback-container").show();
 			});
@@ -71,7 +71,7 @@ function selectOffice(){
 
 function submitRate(){
 	var form = $("#rate-form").serialize();
-	ajaxPOST('/feedback/submit', form, function(response){
+	ajaxPOST('/submit', form, function(response){
 		if (response.status) {
 			$('#submitFeedback-error').html('');
 			$.each(response.error, function(key, value){
@@ -85,14 +85,14 @@ function submitRate(){
 		} else {
 			$("#feedback-container").hide();
 			$("#loader").show();
-			$("#feedback-container").load('/feedback/success', function (){
+			$("#feedback-container").load('/success', function (){
 				$("#loader").hide();
 				$("#feedback-container").show();
 			});
 			setTimeout(function() {
 				$("#feedback-container").hide();
 				$("#loader").show();
-				$("#feedback-container").load('/feedback/office', function (){
+				$("#feedback-container").load('/office', function (){
 					$("#loader").hide();
 					$("#feedback-container").show();});
 			}, 4000)
@@ -103,8 +103,30 @@ function submitRate(){
 function cancelRate() {
 	$("#feedback-container").hide();
 	$("#loader").show();
-	$("#feedback-container").load('/feedback/office', function (){
+	$("#feedback-container").load('/office', function (){
 		$("#loader").hide();
 		$("#feedback-container").show();
 	});
+}
+
+function overallRating() {
+	ajaxGET('/admin/dashboard/overall','', function(response){
+		$("#office-rating").text(response)
+	})
+}
+
+function byOfficeRating() {
+	ajaxGET('/admin/dashboard/byOffice', '', function(response) {
+		$("#by-office").html('');
+		$.each(response, function(key,value){
+			$("#by-office").append('<div class="card">' + 
+                    '<div class="card-body">' +
+                        '<h5 class="card-title font-weight-bold">' + value.rate + '</h5>' +
+                        '<p class="card-text">' + value.office + '</p>' +
+                        '<a href="#" class="btn btn-primary">View Feedbacks</a>' +
+                    '</div>' +
+                '</div>');
+		})
+		
+	})
 }
