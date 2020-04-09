@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddEntiyTable extends Migration
+class AddEntityTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class AddEntiyTable extends Migration
      */
     public function up()
     {
-        Schema::table('entities', function (Blueprint $table) {
+        Schema::create('entities', function (Blueprint $table) {
             $table->increments('entityID');
             $table->string('entity');
-            $table->integer('under');
-            $table->integer('status');
+            $table->integer('under')->default(0);
+            $table->integer('status')->default(1);
         });
     }
 

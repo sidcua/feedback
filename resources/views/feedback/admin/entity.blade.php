@@ -16,36 +16,23 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEntityModal">Add Entity</button>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <table class="table">
-                    <thead>
+        <div class="row d-flex justify-content-center">
+            <div class="col-6">
+                <table class="table table-bordered table-hover">
+                    <thead class="text-center">
                       <tr>
                         <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
+                        <th scope="col">Entity</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
+                      @foreach ($entity as $e)
+                          
                       <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
+                        <th scope="row">{{$e->entityID}}</th>
+                        <td>{{$e->entity}}</td>
                       </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                      </tr>
+                      @endforeach
                     </tbody>
                 </table>
             </div>
@@ -62,17 +49,27 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary">Add Entity</button>
-            </div>
+            <form id="entity-form" method="post" autocomplete="off">
+                {{ csrf_field() }}
+                <div class="modal-body">
+                <label for="entity">Entity Name</label>
+                <input type="text" class="form-control" id="entity" name="entity" style="width:300px" placeholder="Enter entity name.">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="addEntity">Add Entity</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
 @endsection
 @section('scripts')
+<script>
+  $('#addEntity').click(function(){
+    saveEntity();
+  })
+</script>
+
    
 @endsection

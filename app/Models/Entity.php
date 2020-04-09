@@ -11,5 +11,4 @@ class Entity extends Model
     ];
 
     protected $primaryKey = "entityID";
-    protected $table = "entities";
 }

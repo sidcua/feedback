@@ -69,6 +69,31 @@ function selectOffice(){
 	})
 }
 
+function saveEntity(){
+	var form = $("#entity-form").serialize();
+	
+	ajaxPOST('/admin/saveEntity', form, function(response){
+		console.log(response);
+		if(response.status == 0){
+
+			Swal.fire({
+				title:'Error',
+				icon: 'error',
+				text: response.message.entity
+			})
+		}else{
+			Swal.fire({
+				title:'Success',
+				icon: 'success',
+				text: response.message
+			}).then((response) => {
+				// Dito mo append ang values sid kung ayaw mo mag-reload hahahaha
+				location.reload(true);
+			})
+		}
+	})
+}
+
 function submitRate(){
 	var form = $("#rate-form").serialize();
 	ajaxPOST('/submit', form, function(response){

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entity;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -28,6 +29,8 @@ class PagesController extends Controller
     }
 
     public function showEntity() {
-        return view('feedback.admin.entity');
+
+        $entity = Entity::where('status','<>',0)->get();
+        return view('feedback.admin.entity', compact('entity'));
     }
 }
