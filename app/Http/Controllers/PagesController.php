@@ -30,7 +30,7 @@ class PagesController extends Controller
 
     public function showEntity() {
 
-        $entity = Entity::where('status','<>',0)->get();
+        $entity = Entity::where('under',0)->get();
         return view('feedback.admin.entity', compact('entity'));
     }
 }

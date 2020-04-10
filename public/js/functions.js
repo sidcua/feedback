@@ -94,6 +94,84 @@ function saveEntity(){
 	})
 }
 
+function editEntity(id){
+	var form = $("#edit-entity-form").serialize();
+
+	ajaxPOST('/admin/editEntity', form, function(response){
+		console.log(response);
+		Swal.fire({
+			title:'Success',
+			icon: 'success',
+			text: response.message
+		}).then((response) => {
+			// Dito mo append ang values sid kung ayaw mo mag-reload hahahaha
+			location.reload(true);
+		})
+	})
+}
+
+$('#modalEdit').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var entity = button.data('entity')
+	var id = button.data('id')
+    var status = button.data('status')
+	
+
+    var modal = $(this)
+    // modal.find('.modal-title').text('New message to ' + recipient)
+    modal.find('#entity').val(entity)
+	modal.find('#entityID').val(id)
+	modal.find('#status').val(status)
+	if(status == 1){
+		$('.statusbtn').removeClass('btn btn-danger');
+		$('.statusbtn').addClass('btn btn-success btn-sm');
+		$('.statusbtn').text('Activated');
+	}else{
+		$('.statusbtn').removeClass('btn btn-success');
+		$('.statusbtn').addClass('btn btn-danger btn-sm');
+		$('.statusbtn').text('Deactivated');
+	}
+  })
+
+  $('.statusbtn').click(function(e){
+	var form = $("#edit-entity-form").serialize();
+
+	e.preventDefault();
+	var text = $('.statusbtn').text();
+	var status = '';
+	if(text == 'Activated'){
+		status = 'deactivate';
+	}else{
+		status = 'activate';
+	}
+
+	Swal.fire({
+		title: 'Are you sure you want to ' + status +'?',
+		text:'Clicking confirm button will ' + status + ' this entity.',
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Yes, ' + status + '!'
+	  }).then((result) => {
+		ajaxPOST('/admin/changeStatus', form, function(response){
+
+			console.log(response);
+			Swal.fire({
+				title:'Success',
+				icon: 'success',
+				text: response.message
+			}).then((response) => {
+				// Dito mo append ang values sid kung ayaw mo mag-reload hahahaha
+				location.reload(true);
+			})
+
+		})
+	  })
+  });	
+
+
+
 function submitRate(){
 	var form = $("#rate-form").serialize();
 	ajaxPOST('/submit', form, function(response){

@@ -24,8 +24,34 @@ class EntityController extends Controller
                 'entity' => $request->entity
             ]);
             $response['status'] = 1;
-            $response['message'] = strtoupper($request->entity) . ' has been added to record.';
+            $response['message'] = strtoupper($request->entity) . ' has been added to record. Page will now reload.';
         }
         return $response;
+    }
+
+    public function editEntity(Request $request){
+        // return $request->all();
+
+        Entity::where('entityID', $request->entityID)
+                ->update(['entity' => $request->entity]);
+            $response['message'] = strtoupper($request->entity) . ' has been added to record. Page will now reload.';
+            return $response;
+    }
+
+    public function changeStatus(Request $request){
+        $zz = "";
+        $newStatus = "";
+        if ($request->status == 0){
+            $newStatus = 1;
+            $zz = "activated!";
+        }else{
+            $newStatus = 0;
+            $zz = "deactivated!";
+        }
+
+        Entity::where('entityID', $request->entityID)
+                ->update(['status' => $newStatus]);
+            $response['message'] = strtoupper($request->entity) . ' has been ' .$zz. ' Page will now reload.';
+            return $response;
     }
 }

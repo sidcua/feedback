@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="display-1">Entity Test Push</h1>
+                <h1 class="display-1">Entity</h1>
             </div>
         </div>
         <div class="row">
@@ -23,15 +23,18 @@
                       <tr>
                         <th scope="col">#</th>
                         <th scope="col">Entity</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody class="text-center">
-                      @foreach ($entity as $e)
-                          
-                      <tr>
-                        <th scope="row">{{$e->entityID}}</th>
-                        <td>{{$e->entity}}</td>
-                      </tr>
+                      @foreach ($entity as $e)                          
+                          <tr>
+                          <th scope="row">{{$e->entityID}}</th>
+                          <td>{{$e->entity}}</td>
+                          <td>
+                              <button class="btn btn-secondary" data-toggle="modal" data-target="#modalEdit" data-id="{{$e->entityID}}" data-entity="{{$e->entity}}" data-status={{$e->status}}>Edit</button>
+                          </td>
+                        </tr>
                       @endforeach
                     </tbody>
                 </table>
@@ -63,12 +66,51 @@
           </div>
         </div>
       </div>
+
+      <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Edit Entity</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <form id="edit-entity-form" method="post" autocomplete="off">
+                  {{ csrf_field() }}
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-12 text-right">
+                        <button class="statusbtn">ASD</button>
+                      </div>
+                    </div>
+                    <label for="entity">Entity Name</label>
+                    <input type="text" class="form-control" id="entity" name="entity" style="width:300px" placeholder="Enter entity name.">
+                  <input type="text" id="entityID" name="entityID" hidden>
+                  <input type="text" id="status" name="status" hidden>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-primary" id="editEntity">Edit Entity</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
 @endsection
 @section('scripts')
 <script>
   $('#addEntity').click(function(){
     saveEntity();
   })
+
+  $('#editEntity').click(function(){
+    editEntity();
+  })
+
+  
 </script>
 
    
