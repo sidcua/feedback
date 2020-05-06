@@ -18,6 +18,7 @@ class AddEntityTable extends Migration
             $table->string('entity');
             $table->integer('under')->default(0);
             $table->integer('status')->default(1);
+            $table->timestamps();
         });
     }
 

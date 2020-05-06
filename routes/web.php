@@ -38,14 +38,22 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 //Authenticated
 Route::middleware('auth')->group(function (){
     Route::prefix('admin')->group(function (){
-        Route::get('dashboard', 'PagesController@showDashboard');
-        Route::get('dashboard/overall', 'AdminController@overallRating');
-        Route::get('dashboard/byOffice', 'AdminController@byOfficeRating');
-        Route::get('entity', 'PagesController@showEntity');
-        Route::post('saveEntity', 'EntityController@saveEntity');
-        Route::post('editEntity', 'EntityController@editEntity');
-        Route::post('changeStatus', 'EntityController@changeStatus');
 
+        // Dashboard
+        Route::get('dashboard', 'PagesController@showDashboard');
+        Route::prefix('dashboard')->group(function(){
+            Route::get('overall', 'AdminController@overallRating');
+            Route::get('byOffice', 'AdminController@byOfficeRating');
+        });
+        
+        // Entity
+        Route::get('entity', 'PagesController@showEntity');
+        Route::prefix('entity')->group(function(){
+            Route::get('list', 'EntityController@listEntities');
+            Route::get('listMain', 'EntityController@listMainEntities');
+            Route::post('add', 'EntityController@addEntity');
+            Route::post('delete', 'EntityController@deleteEntity');
+        });
     });
 });
 

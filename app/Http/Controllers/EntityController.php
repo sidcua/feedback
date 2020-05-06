@@ -8,50 +8,54 @@ use Validator;
 
 class EntityController extends Controller
 {
-    public function saveEntity(Request $request){
+    public function listEntities(Request $request){
+        $entities = Entity::all();
+        return response()->json($entities);
+    }
 
+    public function listMainEntities(Request $request){
+        $entities = Entity::where('under', 0)
+                            ->orderBy('entity', 'asc')
+                            ->get();
+        return response()->json($entities);
+    }
+
+    public function addEntity(Request $request){
         $validator = Validator::make($request->all(), [
-            'entity' => 'required|unique:entities'
+            'entity' => 'required|unique:entities',
+            'under' => 'required',
         ]);
-
-        $response = array();
-
-        if($validator->fails()){
-            $response['status'] = 0;
-            $response['message'] = $validator->errors();
-        }else{
-            Entity::create([
-                'entity' => $request->entity
-            ]);
+        $response = array(
+            'status' => 0,
+            'error' => array(),
+        );
+        if($validator->fails()) {
             $response['status'] = 1;
-            $response['message'] = strtoupper($request->entity) . ' has been added to record. Page will now reload.';
+            $response['error'] = $validator->errors();
+        } else {
+            $entity = new Entity;
+            $entity->fill($request->all());
+            $entity->status = 1;
+            $entity->save();
         }
-        return $response;
+        return response()->json($response);
     }
 
-    public function editEntity(Request $request){
-        // return $request->all();
-
-        Entity::where('entityID', $request->entityID)
-                ->update(['entity' => $request->entity]);
-            $response['message'] = strtoupper($request->entity) . ' has been added to record. Page will now reload.';
-            return $response;
-    }
-
-    public function changeStatus(Request $request){
-        $zz = "";
-        $newStatus = "";
-        if ($request->status == 0){
-            $newStatus = 1;
-            $zz = "activated!";
-        }else{
-            $newStatus = 0;
-            $zz = "deactivated!";
+    public function deleteEntity(Request $request){
+        $validator = Validator::make($request->all(), [
+            'entity' => 'required',
+        ]);
+        $response = array(
+            'status' => 0,
+            'error' => array(),
+        );
+        if($validator->fails()) {
+            $response['status'] = 1;
+            $response['error'] = $validator->errors();
+        } else {
+            $entity = Entity::find($request->entity);
+            $entity->delete();
         }
-
-        Entity::where('entityID', $request->entityID)
-                ->update(['status' => $newStatus]);
-            $response['message'] = strtoupper($request->entity) . ' has been ' .$zz. ' Page will now reload.';
-            return $response;
+        return response()->json($response);
     }
 }

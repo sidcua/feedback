@@ -21,21 +21,11 @@
                 <table class="table table-bordered table-hover">
                     <thead class="text-center">
                       <tr>
-                        <th scope="col">#</th>
                         <th scope="col">Entity</th>
                         <th>Action</th>
                       </tr>
                     </thead>
-                    <tbody class="text-center">
-                      @foreach ($entity as $e)                          
-                          <tr>
-                          <th scope="row">{{$e->entityID}}</th>
-                          <td>{{$e->entity}}</td>
-                          <td>
-                              <button class="btn btn-secondary" data-toggle="modal" data-target="#modalEdit" data-id="{{$e->entityID}}" data-entity="{{$e->entity}}" data-status={{$e->status}}>Edit</button>
-                          </td>
-                        </tr>
-                      @endforeach
+                    <tbody class="text-center" id="entity-table">
                     </tbody>
                 </table>
             </div>
@@ -43,75 +33,96 @@
     </div>
 
     {{-- Modal --}}
+    {{-- Add Modal --}}
     <div class="modal fade" id="addEntityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalCenterTitle">Add Entity</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Add Entity</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="entity-form" method="post" autocomplete="off">
+            {{ csrf_field() }}
+          <div class="modal-body">
+            <div id="submit-entity-error" class="alert alert-danger collapse">
             </div>
-            <form id="entity-form" method="post" autocomplete="off">
-                {{ csrf_field() }}
-                <div class="modal-body">
-                <label for="entity">Entity Name</label>
-                <input type="text" class="form-control" id="entity" name="entity" style="width:300px" placeholder="Enter entity name.">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="addEntity">Add Entity</button>
-              </div>
-            </form>
+            <div class="form-group">
+              <label>Entity</label>
+              <input name="entity" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Under</label>
+              <select id="entity-select" name="under" class="form-control" id="entity-select">
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="btn-submit-entity">Save changes</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    {{-- Delete Modal --}}
+    <div class="modal fade" id="deleteEntityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Delete Entity</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="delete-entity-error" class="alert alert-danger collapse">
+            </div>
+            Entity: <span class="font-weight-bold" id="entity-span"></span> <br>
+            Are you sure you want to delete this entity?
+          </div>
+          <form id="delete-entity-form" method="post" autocomplete="off">
+            {{ csrf_field() }}
+            <input id="entity-text-delete" name="entity" type="hidden" value="">
+          </form>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" id="btn-delete-entity">Delete</button>
           </div>
         </div>
       </div>
-
-      <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">Edit Entity</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <form id="edit-entity-form" method="post" autocomplete="off">
-                  {{ csrf_field() }}
-                  <div class="modal-body">
-                    <div class="row">
-                      <div class="col-12 text-right">
-                        <button class="statusbtn">ASD</button>
-                      </div>
-                    </div>
-                    <label for="entity">Entity Name</label>
-                    <input type="text" class="form-control" id="entity" name="entity" style="width:300px" placeholder="Enter entity name.">
-                  <input type="text" id="entityID" name="entityID" hidden>
-                  <input type="text" id="status" name="status" hidden>
-
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                  <button type="button" class="btn btn-primary" id="editEntity">Edit Entity</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
+    </div>
 @endsection
+
 @section('scripts')
 <script>
-  $('#addEntity').click(function(){
-    saveEntity();
+  $(document).ready(function (){
+    listEntities();
+    $("#addEntityModal").on('show.bs.modal', function (e) {
+      listMainEntity();
+    })
+    $("#btn-submit-entity").on('click', function (e){
+      addEntity();
+    })
+    $("#addEntityModal").on('hidden.bs.modal', function (e){
+      $(this).find('form').trigger('reset');
+      $("#submit-entity-error").hide();
+      $("#submit-entity-error").html('');
+    })
+    $("#entity-table").on('click', 'tr', function() {
+      $("#entity-text-delete").val($(this).closest('tr').attr('id'));
+      $("#entity-span").text($(this).closest('tr').find('td:nth-child(1)').text());
+    });
+    $("#btn-delete-entity").on('click', function(){
+      deleteEntity();
+    })
+    $("#deleteEntityModal").on('hidden.bs.modal', function (e){
+      $(this).find('form').trigger('reset');
+      $("#delete-entity-error").hide();
+      $("#delete-entity-error").html('');
+    })
   })
-
-  $('#editEntity').click(function(){
-    editEntity();
-  })
-
-  
 </script>
-
-   
 @endsection
