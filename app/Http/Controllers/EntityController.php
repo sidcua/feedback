@@ -58,4 +58,25 @@ class EntityController extends Controller
         }
         return response()->json($response);
     }
+
+    public function editEntity(Request $request){
+        $validator = Validator::make($request->all(), [
+            'entity' => 'required|unique:entities,entity,'.$request->entity.',entityID',
+            'under' => 'required',
+            'status' => 'required',
+        ]);
+        $response = array(
+            'status' => 0,
+            'error' => array(),
+        );
+        if($validator->fails()) {
+            $response['status'] = 1;
+            $response['error'] = $validator->errors();
+        } else {
+            $entity = Entity::find($request->id);
+            $entity->fill($request->all());
+            $entity->save();
+        }
+        return response()->json($response);
+    }
 }

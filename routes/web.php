@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function (){
             Route::get('listMain', 'EntityController@listMainEntities');
             Route::post('add', 'EntityController@addEntity');
             Route::post('delete', 'EntityController@deleteEntity');
+            Route::post('edit', 'EntityController@editEntity');
         });
     });
 });

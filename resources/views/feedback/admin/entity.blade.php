@@ -60,7 +60,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="btn-submit-entity">Save changes</button>
+            <button type="button" class="btn btn-primary" id="btn-submit-entity">Add Entity</button>
           </div>
           </form>
         </div>
@@ -94,6 +94,49 @@
         </div>
       </div>
     </div>
+
+    {{-- Edit Modal --}}
+    <div class="modal fade" id="editEntityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">Edit Entity</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="edit-entity-form" method="post" autocomplete="off">
+            {{ csrf_field() }}
+          <div class="modal-body">
+            <div id="edit-entity-error" class="alert alert-danger collapse">
+            </div>
+            <input name="id" id="edit-entity-id" type="hidden" value="">
+            <div class="form-group">
+              <label>Entity</label>
+              <input name="entity" id="edit-entity" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Under</label>
+              <select id="edit-entity-select" name="under" class="form-control" id="entity-select">
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Status</label>
+              <select id="entity-status-select" name="status" class="form-control" id="entity-select">
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-warning" id="btn-edit-entity">Save changes</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
 @endsection
 
 @section('scripts')
@@ -112,8 +155,15 @@
       $("#submit-entity-error").html('');
     })
     $("#entity-table").on('click', 'tr', function() {
+      // delete
       $("#entity-text-delete").val($(this).closest('tr').attr('id'));
       $("#entity-span").text($(this).closest('tr').find('td:nth-child(1)').text());
+
+      // edit
+      $("#edit-entity-id").val($(this).closest('tr').attr('id'));
+      $("#edit-entity").val($(this).closest('tr').find('td:nth-child(1)').text());
+      $("#entity-status-select").val($(this).closest('tr').find('td:nth-child(3)').text());
+      $("#edit-entity-select").val($(this).closest('tr').find('td:nth-child(2)').text());
     });
     $("#btn-delete-entity").on('click', function(){
       deleteEntity();
@@ -122,6 +172,14 @@
       $(this).find('form').trigger('reset');
       $("#delete-entity-error").hide();
       $("#delete-entity-error").html('');
+    })
+    $("#editEntityModal").on('show.bs.modal', function (e) {
+      $("#edit-entity-error").hide();
+      $("#edit-entity-error").html('');
+      listMainEntity_edit()
+    })
+    $("#btn-edit-entity").on('click', function(){
+      editEntity();
     })
   })
 </script>

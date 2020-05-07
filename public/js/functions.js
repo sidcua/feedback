@@ -137,10 +137,10 @@ function listEntities(){
 	ajaxGET('/admin/entity/list', '', function(response) {
 		$("#entity-table").html('');
 		if(!response[0]) {
-			$("#entity-table").append('<tr><td colspan="2">No entity added yet</td></tr>')
+			$("#entity-table").append('<tr><td colspan="3">No entity added yet</td></tr>')
 		} else {
 			$.each(response, function(key, value){
-				$("#entity-table").append('<tr id="' + value.entityID + '"><td>' + value.entity + '</td><td><button type="button" class="btn btn-warning">Edit</button><button type="button" class="btn btn-danger" id="delete-btn" data-toggle="modal" data-target="#deleteEntityModal">Delete</button></td></tr>')
+				$("#entity-table").append('<tr id="' + value.entityID + '"><td>' + value.entity + '</td><td hidden>' + value.under + '</td><td hidden>' + value.status + '</td><td><button type="button" data-toggle="modal" data-target="#editEntityModal" class="btn btn-warning">Edit</button><button type="button" class="btn btn-danger" id="delete-btn" data-toggle="modal" data-target="#deleteEntityModal">Delete</button></td></tr>');
 			})
 		}
 	});
@@ -174,6 +174,7 @@ function addEntity(){
 
 function deleteEntity(){
 	var form = $("#delete-entity-form").serialize();
+	
 	ajaxPOST('/admin/entity/delete', form, function(response){
 		if(response.status) {
 			$("#delete-entity-error").html('Something went wrong');
@@ -183,4 +184,30 @@ function deleteEntity(){
 			$("#deleteEntityModal").modal('hide');
 		}
 	});
+}
+
+function listMainEntity_edit(){
+	ajaxGET('/admin/entity/listMain', '', function(response){
+		$("#edit-entity-select").html('');
+		$("#edit-entity-select").append('<option value="0">--NONE--</option>');
+		$.each(response, function(key, value){
+			$("#edit-entity-select").append('<option value="' + value.entityID + '">' + value.entity + '</option>');
+		})
+	})
+}
+
+function editEntity(){
+	var form = $("#edit-entity-form").serialize();
+	ajaxPOST('/admin/entity/edit', form, function(response){
+		if(response.status) {
+			$("#edit-entity-error").html('');
+			$.each(response.error, function(key, value){
+				$("#edit-entity-error").append(value + '<br>');
+			})
+			$("#edit-entity-error").show();
+		} else {
+			listEntities();
+			$("#editEntityModal").modal('hide');
+		}
+	})
 }
