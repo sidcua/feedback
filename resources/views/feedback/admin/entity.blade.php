@@ -154,6 +154,13 @@
       $("#submit-entity-error").hide();
       $("#submit-entity-error").html('');
     })
+    async function selectEntity(){
+      await listMainEntity_edit();
+      $('#entity-table tr').each(function() {
+          var customerId = $(this).find('td:nth-child(2)').text();    
+          alert(customerId)
+      });
+    }
     $("#entity-table").on('click', 'tr', function() {
       // delete
       $("#entity-text-delete").val($(this).closest('tr').attr('id'));
@@ -162,8 +169,8 @@
       // edit
       $("#edit-entity-id").val($(this).closest('tr').attr('id'));
       $("#edit-entity").val($(this).closest('tr').find('td:nth-child(1)').text());
-      $("#entity-status-select").val($(this).closest('tr').find('td:nth-child(3)').text());
       $("#edit-entity-select").val($(this).closest('tr').find('td:nth-child(2)').text());
+      $("#entity-status-select").val($(this).closest('tr').find('td:nth-child(3)').text());
     });
     $("#btn-delete-entity").on('click', function(){
       deleteEntity();
@@ -176,7 +183,7 @@
     $("#editEntityModal").on('show.bs.modal', function (e) {
       $("#edit-entity-error").hide();
       $("#edit-entity-error").html('');
-      listMainEntity_edit()
+      selectEntity();
     })
     $("#btn-edit-entity").on('click', function(){
       editEntity();

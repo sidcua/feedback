@@ -61,7 +61,7 @@ class EntityController extends Controller
 
     public function editEntity(Request $request){
         $validator = Validator::make($request->all(), [
-            'entity' => 'required|unique:entities,entity,'.$request->entity.',entityID',
+            'entity' => 'required|unique:entities,entity,'.$request->id.',entityID',
             'under' => 'required',
             'status' => 'required',
         ]);
