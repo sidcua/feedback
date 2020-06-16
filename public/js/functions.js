@@ -140,7 +140,7 @@ function listEntities(){
 			$("#entity-table").append('<tr><td colspan="3">No entity added yet</td></tr>')
 		} else {
 			$.each(response, function(key, value){
-				$("#entity-table").append('<tr id="' + value.entityID + '"><td>' + value.entity + '</td><td hidden>' + value.under + '</td><td hidden>' + value.status + '</td><td><button type="button" data-toggle="modal" data-target="#editEntityModal" class="btn btn-warning">Edit</button><button type="button" class="btn btn-danger" id="delete-btn" data-toggle="modal" data-target="#deleteEntityModal">Delete</button></td></tr>');
+				$("#entity-table").append('<tr id="' + value.entityID + '"><td>' + value.entity + '</td><td hidden>' + value.under + '</td><td hidden>' + value.status + '</td><td><button type="button" id="edit-btn" data-toggle="modal" data-target="#editEntityModal" class="btn btn-warning">Edit</button><button type="button" class="btn btn-danger" id="delete-btn" data-toggle="modal" data-target="#deleteEntityModal">Delete</button></td></tr>');
 			})
 		}
 	});
@@ -174,7 +174,6 @@ function addEntity(){
 
 function deleteEntity(){
 	var form = $("#delete-entity-form").serialize();
-	
 	ajaxPOST('/admin/entity/delete', form, function(response){
 		if(response.status) {
 			$("#delete-entity-error").html('Something went wrong');
@@ -186,12 +185,15 @@ function deleteEntity(){
 	});
 }
 
-function listMainEntity_edit(){
+function listMainEntity_edit(table){
 	ajaxGET('/admin/entity/listMain', '', function(response){
 		$("#edit-entity-select").html('');
 		$("#edit-entity-select").append('<option value="0">--NONE--</option>');
 		$.each(response, function(key, value){
 			$("#edit-entity-select").append('<option value="' + value.entityID + '">' + value.entity + '</option>');
+			if(response.length == $("#edit-entity-select > option").length - 1) {
+				$("#edit-entity-select").val($(table).closest('tr').find('td:nth-child(2)').text());
+			}
 		})
 	})
 }
@@ -211,3 +213,4 @@ function editEntity(){
 		}
 	})
 }
+
