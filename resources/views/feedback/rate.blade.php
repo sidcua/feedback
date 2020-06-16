@@ -1,9 +1,9 @@
 <div class="row justify-content-center p-3">
-    <div class="col-lg-10 text-center">
+    <div class="col-sm-10 col-md-10 text-center">
         <p class="h1">How do you feel regarding our service?</p>
         <p class="h6">Click on the circle under the emoji that corresponds to your feelings.</p>
     </div>
-    <div class="col-lg-6 text-center">
+    <div class="col-sm-6 col-md-6 text-center">
         <div id="submitFeedback-error" class="alert alert-danger collapse">
         </div>
     </div>

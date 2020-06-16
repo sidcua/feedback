@@ -20,6 +20,16 @@ class EntityController extends Controller
         return response()->json($entities);
     }
 
+    public function listMainEntitiesEdit(Request $request){
+        $entities = Entity::where([
+                                ['under', 0],
+                                ['entityID', '<>', $request->id]
+                            ])
+                            ->orderBy('entity', 'asc')
+                            ->get();
+        return response()->json($entities);
+    }
+
     public function addEntity(Request $request){
         $validator = Validator::make($request->all(), [
             'entity' => 'required|unique:entities',

@@ -7,7 +7,7 @@
     @include('inc.navbar')
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-sm-12 col-md-12">
                 <div class="jumbotron">
                     <h1 class="display-4 font-weight-bold" id="office-rating">----</h1>
                     <p class="lead">CHEDRO IX Overall Rating</p>
@@ -19,7 +19,7 @@
             
         </div>
         <div class="row">
-            <div class="col-6" id="by-office">
+            <div class="col-sm-6 col-md-6" id="by-office">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title font-weight-bold">---</h5>

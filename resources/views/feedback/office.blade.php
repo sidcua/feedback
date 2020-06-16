@@ -1,8 +1,10 @@
 <div class="row justify-content-center p-3">
-    <p class="h1">Which office did you visit today?</p>
+    <div class="col-sm-10 col-md-10 text-center">
+        <p class="h1">Which office did you visit today?</p>
+    </div>
 </div>
 <div class="row justify-content-center" style="margin-top: 50px;">
-    <div class="col-md-6">
+    <div class="col-sm-6 col-md-6">
         <p class="h1 text-center"><span class="badge badge-pill badge-info">Technical Division</span></p>
         <button onclick="office('Office of the Director')" type="button" class="btn btn-info btn-block"><span class="h1">Office of the Director</span></button>
         <button onclick="office('Office of the Chief')" type="button" class="btn btn-info btn-block"><span class="h1">Office of the Chief</span></button>
@@ -13,7 +15,7 @@
         <button onclick="office('K to 12 Unit')" type="button" class="btn btn-info btn-block"><span class="h1">K to 12 Unit</span></button>
         <button onclick="office('UniFAST Unit')" type="button" class="btn btn-info btn-block"><span class="h1">UniFAST Unit</span></button>
     </div>
-    <div class="col-md-6">
+    <div class="col-sm-6 col-md-6">
         <p class="h1 text-center"><span class="badge badge-pill badge-primary">Administrative Division</span></p>
         <button onclick="office('Records\' Office')" type="button" class="btn btn-primary btn-block"><span class="h1">Records' Office</span></button>
         <button onclick="office('Accounting Office')" type="button" class="btn btn-primary btn-block"><span class="h1">Accounting Office</span></button>

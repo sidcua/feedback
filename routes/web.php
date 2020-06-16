@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function (){
         Route::prefix('entity')->group(function(){
             Route::get('list', 'EntityController@listEntities');
             Route::get('listMain', 'EntityController@listMainEntities');
+            Route::get('listMainEdit', 'EntityController@listMainEntitiesEdit');
             Route::post('add', 'EntityController@addEntity');
             Route::post('delete', 'EntityController@deleteEntity');
             Route::post('edit', 'EntityController@editEntity');

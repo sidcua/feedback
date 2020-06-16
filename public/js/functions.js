@@ -186,7 +186,8 @@ function deleteEntity(){
 }
 
 function listMainEntity_edit(table){
-	ajaxGET('/admin/entity/listMain', '', function(response){
+	var id = $("#edit-entity-id").val();
+	ajaxGET('/admin/entity/listMainEdit', {id: id}, function(response){
 		$("#edit-entity-select").html('');
 		$("#edit-entity-select").append('<option value="0">--NONE--</option>');
 		$.each(response, function(key, value){

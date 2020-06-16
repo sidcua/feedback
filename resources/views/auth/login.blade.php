@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-5">
+        <div class="col-sm-5 col-md-5">
             <form method="POST" action="{{ route('login') }}" style="margin-top: 100px;">
                 {{ csrf_field() }}
                 <p class="h2 text-center p-4">Feedback Monitoring System</p>

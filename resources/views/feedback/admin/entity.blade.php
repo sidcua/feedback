@@ -7,17 +7,17 @@
     @include('inc.navbar')
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-sm-12 col-md-12">
                 <h1 class="display-1">Entity</h1>
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-sm-12 col-md-12">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addEntityModal">Add Entity</button>
             </div>
         </div>
         <div class="row d-flex justify-content-center">
-            <div class="col-6">
+            <div class="col-sm-6 col-md-6">
                 <table class="table table-bordered table-hover">
                     <thead class="text-center">
                       <tr>
@@ -165,8 +165,8 @@
 
       // edit
       if(e.target.id == "edit-btn") {
-        listMainEntity_edit(table)
         $("#edit-entity-id").val($(this).closest('tr').attr('id'));
+        listMainEntity_edit(table)
         $("#edit-entity").val($(this).closest('tr').find('td:nth-child(1)').text());
         $("#entity-status-select").val($(this).closest('tr').find('td:nth-child(3)').text());
       }
