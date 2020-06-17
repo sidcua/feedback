@@ -1,3 +1,7 @@
+// Variables
+const mainIcon = '<svg class="bi bi-chevron-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>';
+const subIcon = '<svg class="bi bi-arrow-return-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.146 5.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L12.793 9l-2.647-2.646a.5.5 0 0 1 0-.708z"/><path fill-rule="evenodd" d="M3 2.5a.5.5 0 0 0-.5.5v4A2.5 2.5 0 0 0 5 9.5h8.5a.5.5 0 0 0 0-1H5A1.5 1.5 0 0 1 3.5 7V3a.5.5 0 0 0-.5-.5z"/></svg>';
+
 function ajaxPOST(url, data, response_callback, failed_callback){
 
 	// if(typeof data === 'object'){
@@ -136,11 +140,19 @@ var entities = [];
 function listEntities(){
 	ajaxGET('/admin/entity/list', '', function(response) {
 		$("#entity-table").html('');
+		var row;
 		if(!response[0]) {
 			$("#entity-table").append('<tr><td colspan="3">No entity added yet</td></tr>')
 		} else {
 			$.each(response, function(key, value){
-				$("#entity-table").append('<tr id="' + value.entityID + '"><td>' + value.entity + '</td><td hidden>' + value.under + '</td><td hidden>' + value.status + '</td><td><button type="button" id="edit-btn" data-toggle="modal" data-target="#editEntityModal" class="btn btn-warning">Edit</button><button type="button" class="btn btn-danger" id="delete-btn" data-toggle="modal" data-target="#deleteEntityModal">Delete</button></td></tr>');
+				row = '<tr id="' + value.entityID + '"><td>';
+				if (!value.under) {
+					row += '<p class="text-left">' + mainIcon;
+				} else {
+					row += '<p class="text-left pl-3">' + subIcon;
+				}
+				row += value.entity + '</p></td><td hidden>' + value.under + '</td><td hidden>' + value.status + '</td><td><button type="button" id="edit-btn" data-toggle="modal" data-target="#editEntityModal" class="btn btn-warning">Edit</button><button type="button" class="btn btn-danger" id="delete-btn" data-toggle="modal" data-target="#deleteEntityModal">Delete</button></td></tr>';
+				$("#entity-table").append(row);
 			})
 		}
 	});

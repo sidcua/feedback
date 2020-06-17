@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Entity;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Support\Facades\DB;
 
 class EntityController extends Controller
 {
     public function listEntities(Request $request){
-        $entities = Entity::all();
+        // $entities = Entity::all();
+        $entities = DB::select('SELECT * FROM entities ORDER BY (CASE WHEN under = "0" THEN entityID ELSE under END), under, entityID');
         return response()->json($entities);
     }
 
