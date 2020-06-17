@@ -145,11 +145,14 @@ function listEntities(){
 			$("#entity-table").append('<tr><td colspan="3">No entity added yet</td></tr>')
 		} else {
 			$.each(response, function(key, value){
-				row = '<tr id="' + value.entityID + '"><td>';
+				row = '<tr id="' + value.entityID + '"><td><p class="text-left';
+				if (!value.status) {
+					row += ' text-danger';
+				}
 				if (!value.under) {
-					row += '<p class="text-left">' + mainIcon;
+					row += '">' + mainIcon;
 				} else {
-					row += '<p class="text-left pl-3">' + subIcon;
+					row += ' pl-3">' + subIcon;
 				}
 				row += value.entity + '</p></td><td hidden>' + value.under + '</td><td hidden>' + value.status + '</td><td><button type="button" id="edit-btn" data-toggle="modal" data-target="#editEntityModal" class="btn btn-warning">Edit</button><button type="button" class="btn btn-danger" id="delete-btn" data-toggle="modal" data-target="#deleteEntityModal">Delete</button></td></tr>';
 				$("#entity-table").append(row);

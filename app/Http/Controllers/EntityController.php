@@ -16,7 +16,9 @@ class EntityController extends Controller
     }
 
     public function listMainEntities(Request $request){
-        $entities = Entity::where('under', 0)
+        $entities = Entity::where([
+                                ['under', 0],
+                            ])
                             ->orderBy('entity', 'asc')
                             ->get();
         return response()->json($entities);
@@ -25,6 +27,7 @@ class EntityController extends Controller
     public function listMainEntitiesEdit(Request $request){
         $entities = Entity::where([
                                 ['under', 0],
+                                ['status', 1],
                                 ['entityID', '<>', $request->id]
                             ])
                             ->orderBy('entity', 'asc')
@@ -88,6 +91,9 @@ class EntityController extends Controller
             $entity = Entity::find($request->id);
             $entity->fill($request->all());
             $entity->save();
+            if (!$request->under) {
+                $entities = Entity::where('under', $request->id)->update(['status' => $request->status]);
+            }
         }
         return response()->json($response);
     }
