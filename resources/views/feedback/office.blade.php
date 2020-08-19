@@ -1,9 +1,10 @@
 <div class="row justify-content-center p-3">
     <div class="col-sm-10 col-md-10 text-center">
-        <p class="h1">Which office did you visit today?</p>
+        <p class="h1">Welcome to CHED Online Feedback System</p>
+        <p class="h3">Please select the office that assisted you</p>
     </div>
 </div>
-<div class="row justify-content-center" style="margin-top: 50px;">
+<div class="row justify-content-center" style="margin-top: 10px;">
     <div class="col-sm-6 col-md-6">
         <p class="h1 text-center"><span class="badge badge-pill badge-info">Technical Division</span></p>
         <button onclick="office('Office of the Director')" type="button" class="btn btn-info btn-block"><span class="h1">Office of the Director</span></button>
