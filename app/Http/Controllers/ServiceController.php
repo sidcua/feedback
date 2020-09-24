@@ -62,7 +62,7 @@ class ServiceController extends Controller
 
     public function editService(Request $request) {
         $validator = Validator::make($request->all(), [
-            'service' => 'required|unique:services, service, '.$request->id.', serviceID',
+            'service' => 'required|unique:services,service,'.$request->id.',serviceID',
             'entity' => 'required'
         ]);
         $response = array(
@@ -73,7 +73,11 @@ class ServiceController extends Controller
             $response['status'] = 1;
             $response['error'] = $validator->errors();
         } else {
-            
+            $service = Service::find($request->id);
+            $service->fill($request->all());
+            $service->entityID = $request->entity;
+            $service->save();
         }
+        return response()->json($response);
     }
 }

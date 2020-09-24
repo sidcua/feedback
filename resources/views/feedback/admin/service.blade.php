@@ -126,7 +126,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-warning" id="btn-edit-entity">Save changes</button>
+            <button type="button" class="btn btn-warning" id="btn-edit-service">Save changes</button>
           </div>
           </form>
         </div>
@@ -182,9 +182,9 @@
       $("#edit-service-error").hide();
       $("#edit-service-error").html('');
     })
-    // $("#btn-edit-entity").on('click', function(){
-    //   editEntity();
-    // })
+    $("#btn-edit-service").on('click', function(){
+      editService();
+    })
   })
 </script>
 @endsection

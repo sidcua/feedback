@@ -56,7 +56,7 @@ Route::middleware('auth')->group(function (){
             Route::get('listEntity', 'ServiceController@listEntity');
             Route::post('add', 'ServiceController@addService');
             Route::post('delete', 'ServiceController@deleteService');
-            Route::post('edit', 'ServiceController@editEntity');
+            Route::post('edit', 'ServiceController@editService');
         });
 
         //Feedback

@@ -279,7 +279,7 @@ function listServices() {
 			$("#service-table").append('<tr><td colspan="3">No service added yet</td></tr>')
 		} else {
 			$.each(response, function(key, value){
-				$("#service-table").append('<tr id="' + value.serviceID + '"><td><p class="text-left">' + value.entity + '</p><td><p class="">' + value.service + '</p></td><td><button type="button" id="edit-btn" data-toggle="modal" data-target="#editServiceModal" class="btn btn-warning">Edit</button><button type="button" class="btn btn-danger" id="delete-btn" data-toggle="modal" data-target="#deleteServiceModal">Delete</button></td></tr>');
+				$("#service-table").append('<tr id="' + value.serviceID + '"><td><p class="text-left">' + value.entity + '</p><td><p class="">' + value.service + '</p></td><td hidden>' + value.entityID + '</td><td><button type="button" id="edit-btn" data-toggle="modal" data-target="#editServiceModal" class="btn btn-warning">Edit</button><button type="button" class="btn btn-danger" id="delete-btn" data-toggle="modal" data-target="#deleteServiceModal">Delete</button></td></tr>');
 			})
 		}
 	})
@@ -325,8 +325,8 @@ function deleteService() {
 }
 
 function editService() {
-	var form = $("#edit-servcie-form").serialize();
-	ajaxPOST('admin/service/edit', form, function (response) {
+	var form = $("#edit-service-form").serialize();
+	ajaxPOST('/admin/service/edit', form, function (response) {
 		if(response.status) {
 			$("#edit-service-error").html('');
 			$.each(response.error, function(key, value){
@@ -352,9 +352,12 @@ function listFeedback_Admin() {
 
 function listEntities_Service_edit(table) {
 	ajaxGET('/admin/service/listEntity', '', function (response) {
-		$("#edit-service-select").html();
+		$("#edit-service-select").html('');
 		$.each(response, function (key, value) {
-			$("#edit-service-select").append('<option value="' + value.entityID + '">' + value.entity + '</option>')
+			$("#edit-service-select").append('<option value="' + value.entityID + '">' + value.entity + '</option>');
+			if(response.length == $("#edit-service-select > option").length) {
+				$("#edit-service-select").val($(table).closest('tr').find('td:nth-child(3)').text());
+			}
 		})
 	})
 }
