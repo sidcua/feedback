@@ -28,16 +28,17 @@
 @section('scripts')
     <script>
         $(document).ready(function(){
-            $("#feedback-container").hide();
-            $("#loader").show();
-            $("#feedback-container").load('/office', function(){
-                $("#loader").hide();
-                $("#feedback-container").show();
-            });
+            listOffice();
         })
+
         function office(office){
             $("#office").val(office);
             selectOffice();
+        }
+
+        function service(service){
+            $("#service").val(service);
+            selectService();
         }
     </script>
 @endsection

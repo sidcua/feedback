@@ -18,9 +18,12 @@ Route::middleware('guest')->group(function (){
     //Feedback
     Route::get('/', 'PagesController@showFeedbackForm');
     Route::get('office', 'PagesController@showOffice');
+    Route::get('office/list', 'FeedbackController@listOffice');
     Route::get('rate', 'PagesController@showRate');
     Route::get('success', 'PagesController@showSuccess');
     Route::post('office/select', 'FeedbackController@selectOffice');
+    Route::get('service', 'PagesController@showService');
+    Route::post('service/select', 'FeedbackController@selectService');
     Route::post('submit', 'FeedbackController@submitFeedback');
 });
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
@@ -44,6 +47,22 @@ Route::middleware('auth')->group(function (){
             Route::post('add', 'EntityController@addEntity');
             Route::post('delete', 'EntityController@deleteEntity');
             Route::post('edit', 'EntityController@editEntity');
+        });
+
+        //Service
+        Route::get('service', 'PagesController@showServicePage');
+        Route::prefix('service')->group( function () {
+            Route::get('list', 'ServiceController@listService');
+            Route::get('listEntity', 'ServiceController@listEntity');
+            Route::post('add', 'ServiceController@addService');
+            Route::post('delete', 'ServiceController@deleteService');
+            Route::post('edit', 'ServiceController@editEntity');
+        });
+
+        //Feedback
+        Route::get('feedback', 'PagesController@showFeedbackPage');
+        Route::prefix('feedback')->group( function () {
+            Route::get('list', 'AdminController@listFeedback');
         });
     });
 });

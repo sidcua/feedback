@@ -8,12 +8,18 @@ use Illuminate\Support\Facades\DB;
 class AdminController extends Controller
 {
     public function overallRating(){
-        $rating = Feedback::avg('rate');
+        $rating['rate'] = Feedback::avg('rate');
+        $rating['count'] = Feedback::all()->count();
         return response()->json($rating);
     }
 
     public function byOfficeRating() {
-        $rating = DB::select('SELECT office, AVG(rate) AS rate FROM feedbacks GROUP BY office');
+        $rating = DB::select('SELECT office, AVG(rate) AS rate, COUNT(rate) as count FROM feedbacks GROUP BY office');
         return response()->json($rating);
+    }
+
+    public function listFeedback() {
+        $feedbacks = Feedback::select('*')->orderBy('created_at', 'DESC')->paginate(5);
+        return response()->json($feedbacks);
     }
 }

@@ -69,7 +69,9 @@ class EntityController extends Controller
             $response['error'] = $validator->errors();
         } else {
             $entity = Entity::find($request->entity);
+            $subEntity = Entity::where('under', $entity->entityID);
             $entity->delete();
+            $subEntity->delete();
         }
         return response()->json($response);
     }

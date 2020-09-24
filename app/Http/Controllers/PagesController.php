@@ -16,6 +16,10 @@ class PagesController extends Controller
         return view()->make('feedback.office');
     }
 
+    public function showService() {
+        return view()->make('feedback.service');
+    }
+
     public function showRate(){
         return view()->make('feedback.rate');
     }
@@ -29,8 +33,15 @@ class PagesController extends Controller
     }
 
     public function showEntity() {
-
         $entity = Entity::where('under',0)->get();
         return view('feedback.admin.entity', compact('entity'));
+    }
+
+    public function showServicePage() {
+        return view('feedback.admin.service');
+    }
+
+    public function showFeedbackPage() {
+        return view('feedback.admin.feedback');
     }
 }

@@ -12,10 +12,10 @@ class AccountSeeder extends Seeder
      */
     public function run()
     {
-        Account::create([
+        Account::insert([
             'name' => 'Sid Jeric Cua',
-            'email' => 'sidcua@gmail.com',
-            'password' => bcrypt('sidcua'),
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('admin'),
             'type' => 1,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),

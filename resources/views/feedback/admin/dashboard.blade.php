@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Feedback')
+@section('title', 'Dashboard')
 @section('styles')
     {{-- <link rel='stylesheet' href='https://unpkg.com/emoji.css/dist/emoji.min.css'> --}}
 @endsection
@@ -13,7 +13,7 @@
                     <p class="lead">CHEDRO IX Overall Rating</p>
                     <hr class="my-4">
                     <p></p>
-                    <a class="btn btn-primary btn-lg" href="#" role="button">View all feedbacks</a>
+                    <a class="btn btn-primary btn-lg" href="#" role="button">View all feedbacks <span class="badge badge-light" id="total-feedback-badge"></span></a>
                 </div>
             </div>
             

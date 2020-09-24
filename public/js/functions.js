@@ -1,7 +1,3 @@
-// Variables
-const mainIcon = '<svg class="bi bi-chevron-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>';
-const subIcon = '<svg class="bi bi-arrow-return-right" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.146 5.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L12.793 9l-2.647-2.646a.5.5 0 0 1 0-.708z"/><path fill-rule="evenodd" d="M3 2.5a.5.5 0 0 0-.5.5v4A2.5 2.5 0 0 0 5 9.5h8.5a.5.5 0 0 0 0-1H5A1.5 1.5 0 0 1 3.5 7V3a.5.5 0 0 0-.5-.5z"/></svg>';
-
 function ajaxPOST(url, data, response_callback, failed_callback){
 
 	// if(typeof data === 'object'){
@@ -53,12 +49,59 @@ function ajaxGET(url, data, response_callback, failed_callback){
         }
 	});
 }
+function listOffice() {
+	$("#feedback-container").hide();
+	$("#loader").show();
+	ajaxGET('/office/list', '', function (response) {
+		$("#feedback-container").load('/office', function(){
+			$("#office-container").html('');
+			$.each(response, function(key, value) {
+				$("#office-container").append('<div class="col-sm-6 col-md-6 p-1"><button onclick="office(' + value.entityID + ')" type="button" class="btn btn-primary btn-block"><span class="h1">' + value.entity + '</span></button></div>');
+			})
+			$("#loader").hide();
+			$("#feedback-container").show();
+		});
+	})
+}
 
 function selectOffice(){
 	$("#feedback-container").hide();
 	$("#loader").show();
 	var form = $("#select-office-form").serialize();
 	ajaxPOST('/office/select', form, function(response){
+		console.log(response)
+		if (response){
+			if (response[0] != null) {
+				$("#feedback-container").load('/service', function (){
+					$("#service-container").html('');
+					$("#office-selected").html(response[0].entity);
+					$.each(response, function(key, value) {
+						$("#service-container").append('<button onclick="service(' + value.serviceID + ')" type="button" class="btn btn-primary btn-block"><span class="h1">' + value.service + '</span></button>');
+					});
+					$("#service-container").append('<button onclick="service(0)" type="button" class="btn btn-primary btn-block"><span class="h1">Other Matters</span></button>');
+					$("#loader").hide();
+					$("#feedback-container").show();
+				});
+			} else {
+				$("#feedback-container").load('/rate', function (){
+					$("#loader").hide();
+					$("#feedback-container").show();
+				});
+			}
+		} else if (response) {
+			$("#feedback-container").load('/office', function (){
+				$("#loader").hide();
+				$("#feedback-container").show();
+			});
+		}
+	})
+}
+
+function selectService() {
+	$("#feedback-container").hide();
+	$("#loader").show();
+	var form = $("#select-service-form").serialize();
+	ajaxPOST('/service/select', form, function(response){
 		if (response){
 			$("#feedback-container").load('/rate', function (){
 				$("#loader").hide();
@@ -97,25 +140,24 @@ function submitRate(){
 				$("#feedback-container").hide();
 				$("#loader").show();
 				$("#feedback-container").load('/office', function (){
-					$("#loader").hide();
-					$("#feedback-container").show();});
+					listOffice() });
 			}, 4000)
 		}
 	})
 }
 
 function cancelRate() {
-	$("#feedback-container").hide();
-	$("#loader").show();
-	$("#feedback-container").load('/office', function (){
-		$("#loader").hide();
-		$("#feedback-container").show();
-	});
+	listOffice();
+}
+
+function cancelService() {
+	listOffice();
 }
 
 function overallRating() {
 	ajaxGET('/admin/dashboard/overall','', function(response){
-		$("#office-rating").text(response)
+		$("#office-rating").text(response.rate);
+		$("#total-feedback-badge").text(response.count);
 	})
 }
 
@@ -124,10 +166,10 @@ function byOfficeRating() {
 		$("#by-office").html('');
 		$.each(response, function(key,value){
 			$("#by-office").append('<div class="card">' + 
-                    '<div class="card-body">' +
+					'<div class="card-body">' +
                         '<h5 class="card-title font-weight-bold">' + value.rate + '</h5>' +
                         '<p class="card-text">' + value.office + '</p>' +
-                        '<a href="#" class="btn btn-primary">View Feedbacks</a>' +
+                        '<a href="#" class="btn btn-primary">View Feedbacks <span class="badge badge-light">' + value.count + '</span></a>' +
                     '</div>' +
                 '</div>');
 		})
@@ -150,9 +192,9 @@ function listEntities(){
 					row += ' text-danger';
 				}
 				if (!value.under) {
-					row += '">' + mainIcon;
+					row += '">';
 				} else {
-					row += ' pl-3">' + subIcon;
+					row += ' pl-5">';
 				}
 				row += value.entity + '</p></td><td hidden>' + value.under + '</td><td hidden>' + value.status + '</td><td><button type="button" id="edit-btn" data-toggle="modal" data-target="#editEntityModal" class="btn btn-warning">Edit</button><button type="button" class="btn btn-danger" id="delete-btn" data-toggle="modal" data-target="#deleteEntityModal">Delete</button></td></tr>';
 				$("#entity-table").append(row);
@@ -230,3 +272,89 @@ function editEntity(){
 	})
 }
 
+function listServices() {
+	ajaxGET('/admin/service/list', '', function (response) {
+		$("#service-table").html('');
+		if(!response[0]) {
+			$("#service-table").append('<tr><td colspan="3">No service added yet</td></tr>')
+		} else {
+			$.each(response, function(key, value){
+				$("#service-table").append('<tr id="' + value.serviceID + '"><td><p class="text-left">' + value.entity + '</p><td><p class="">' + value.service + '</p></td><td><button type="button" id="edit-btn" data-toggle="modal" data-target="#editServiceModal" class="btn btn-warning">Edit</button><button type="button" class="btn btn-danger" id="delete-btn" data-toggle="modal" data-target="#deleteServiceModal">Delete</button></td></tr>');
+			})
+		}
+	})
+}
+
+function listEntities_Service() {
+	ajaxGET('/admin/service/listEntity', '', function (response) {
+		$("#entity-select").html();
+		$.each(response, function (key, value) {
+			$("#entity-select").append('<option value="' + value.entityID + '">' + value.entity + '</option>')
+		})
+	})
+}
+
+function addService() {
+	var form = $("#add-service-form").serialize();
+	ajaxPOST('/admin/service/add', form, function (response) {
+		$("#service-table").html('');
+		if (response.status) {
+			$("#submit-service-error").html('');
+			$.each(response.error, function(key, value){
+				$("#submit-service-error").append(value + '<br>');
+			})
+			$("#submit-service-error").show();
+		} else {
+			listServices();
+			$("#addServiceModal").modal('hide')
+		}
+	})
+}
+
+function deleteService() {
+	var form = $("#delete-service-form").serialize();
+	ajaxPOST('/admin/service/delete', form, function (response) {
+	if(response.status) {
+		$("#delete-entity-error").html('Something went wrong');
+		$("#delete-entity-error").show();
+	} else {
+		listServices();
+		$("#deleteServiceModal").modal('hide');
+	}
+	})
+}
+
+function editService() {
+	var form = $("#edit-servcie-form").serialize();
+	ajaxPOST('admin/service/edit', form, function (response) {
+		if(response.status) {
+			$("#edit-service-error").html('');
+			$.each(response.error, function(key, value){
+				$("#edit-service-error").append(value + '<br>');
+			})
+			$("#edit-service-error").show();
+		} else {
+			listServices();
+			$("#editServiceModal").modal('hide');
+		}
+	})
+}
+
+function listFeedback_Admin() {
+	ajaxGET('/admin/feedback/list', '', function (response) {
+		$("#feedback-table").html();
+		console.log(response)
+		$.each(response, function (key, value) {
+			$("#feedback-table").append('<tr id="' + value.data.feedbackID + '"><td>' + value.entity + '</td><td>' + value.service + '</td><td>' + value.name + '</td><td>' + value.rate + '</td><td>' + value.comment + '</td><td>' + value.created_at + '</td></tr>');
+		})
+	})
+}
+
+function listEntities_Service_edit(table) {
+	ajaxGET('/admin/service/listEntity', '', function (response) {
+		$("#edit-service-select").html();
+		$.each(response, function (key, value) {
+			$("#edit-service-select").append('<option value="' + value.entityID + '">' + value.entity + '</option>')
+		})
+	})
+}

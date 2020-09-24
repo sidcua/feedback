@@ -11,6 +11,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/admin/entity">Entities</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/service">Services</a>
+            </li>
         </ul>
         <div class="navbar-nav ml-auto">
             <li class="nav-item active">

@@ -12,4 +12,8 @@ class Entity extends Model
 
     protected $primaryKey = "entityID";
     protected $table = "entities";
+
+    public function services() {
+        return $this->hasMany('App\Models\Service', 'entityID', 'entityID');
+    }
 }
