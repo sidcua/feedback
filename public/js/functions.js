@@ -60,6 +60,38 @@ function selectOffice(){
 	var form = $("#select-office-form").serialize();
 	ajaxPOST('/office/select', form, function(response){
 		if (response){
+			if (response[0] != null) {
+				$("#feedback-container").load('/service', function (){
+					$("#service-container").html('');
+					$("#office-selected").html(response[0].entity);
+					$.each(response, function(key, value) {
+						$("#service-container").append('<button onclick="service(\'' + value.service + '\')" type="button" class="btn btn-primary btn-block"><span class="h1">' + value.service + '</span></button>');
+					});
+					$("#service-container").append('<button onclick="service(\'Other Matters\')" type="button" class="btn btn-primary btn-block"><span class="h1">Other</span></button>');
+					$("#loader").hide();
+					$("#feedback-container").show();
+				});
+			} else {
+				$("#feedback-container").load('/rate', function (){
+					$("#loader").hide();
+					$("#feedback-container").show();
+				});
+			}
+		} else if (response) {
+			$("#feedback-container").load('/office', function (){
+				$("#loader").hide();
+				$("#feedback-container").show();
+			});
+		}
+	})
+}
+
+function selectService() {
+	$("#feedback-container").hide();
+	$("#loader").show();
+	var form = $("#select-service-form").serialize();
+	ajaxPOST('/service/select', form, function(response){
+		if (response){
 			$("#feedback-container").load('/rate', function (){
 				$("#loader").hide();
 				$("#feedback-container").show();
@@ -113,9 +145,19 @@ function cancelRate() {
 	});
 }
 
+function cancelService() {
+	$("#feedback-container").hide();
+	$("#loader").show();
+	$("#feedback-container").load('/office', function (){
+		$("#loader").hide();
+		$("#feedback-container").show();
+	});
+}
+
 function overallRating() {
 	ajaxGET('/admin/dashboard/overall','', function(response){
-		$("#office-rating").text(response)
+		$("#office-rating").text(response.rate);
+		$("#total-feedback-badge").text(response.count);
 	})
 }
 
@@ -124,10 +166,10 @@ function byOfficeRating() {
 		$("#by-office").html('');
 		$.each(response, function(key,value){
 			$("#by-office").append('<div class="card">' + 
-                    '<div class="card-body">' +
+					'<div class="card-body">' +
                         '<h5 class="card-title font-weight-bold">' + value.rate + '</h5>' +
                         '<p class="card-text">' + value.office + '</p>' +
-                        '<a href="#" class="btn btn-primary">View Feedbacks</a>' +
+                        '<a href="#" class="btn btn-primary">View Feedbacks <span class="badge badge-light">' + value.count + '</span></a>' +
                     '</div>' +
                 '</div>');
 		})
@@ -230,3 +272,54 @@ function editEntity(){
 	})
 }
 
+function submitClientRate(){
+	loadSubmitButton();
+	var form = $("#client-form").serialize();
+	console.log(form);
+	ajaxPOST('/submitForm', form, function(response){
+		if (response.status) {
+			$("#submitFeedback-error").html('');
+			// $("#submitFeedback-error").append("Please accomplish the form before submitting");
+			please = 0;
+			$.each(response.error, function(key, value) {
+				if(key == 'client') {
+					$("#submitFeedback-error").append("Name / Office / Organization is required<br>");
+				} else {
+					if (!please) {
+						$("#submitFeedback-error").append("Please rate " + key + ", ");
+						please = 1;
+					} else {
+						$("#submitFeedback-error").append(key + ", ");
+					}
+				}
+				
+			})
+			$('#submitFeedback-error').show();
+			$('html,body').scrollTop(0);
+			resetSubmitButton();
+		} else {
+			$("#feedback-container").hide();
+			$("#loader").show();
+			$("#feedback-container").load('/success', function (){
+				$("#loader").hide();
+				$("#feedback-container").show();
+			});
+			setTimeout(function() {
+				$("#feedback-container").hide();
+				$("#loader").show();
+				$("#feedback-container").load('/form', function (){
+					$("#loader").hide();
+					$("#feedback-container").show();});
+			}, 4000)
+		}
+	})
+}
+
+function cancelForm() {
+	$("#feedback-container").hide();
+	$("#loader").show();
+	$("#feedback-container").load('/form', function (){
+		$("#loader").hide();
+		$("#feedback-container").show();
+	});
+}

@@ -27,3 +27,6 @@
     {{csrf_field()}}
     <input type="hidden" id="office" name="office" value="">
 </form>
+
+{{-- <p class="h1 text-center"><span class="badge badge-pill badge-info">Technical Division</span></p>
+<button onclick="office('Office of the Director')" type="button" class="btn btn-info btn-block"><span class="h1">Office of the Director</span></button> --}}

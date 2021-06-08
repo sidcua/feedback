@@ -9,11 +9,15 @@ use Auth;
 class PagesController extends Controller
 {
     public function showFeedbackForm(){
-        return view('feedback.index');
+        return view('feedback.index2');
     }
 
     public function showOffice(){
         return view()->make('feedback.office');
+    }
+
+    public function showService() {
+        return view()->make('feedback.service');
     }
 
     public function showRate(){
@@ -32,5 +36,9 @@ class PagesController extends Controller
 
         $entity = Entity::where('under',0)->get();
         return view('feedback.admin.entity', compact('entity'));
+    }
+
+    public function showForm() {
+        return view('feedback.form');
     }
 }

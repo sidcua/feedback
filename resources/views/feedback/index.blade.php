@@ -35,9 +35,15 @@
                 $("#feedback-container").show();
             });
         })
+
         function office(office){
             $("#office").val(office);
             selectOffice();
+        }
+
+        function service(service){
+            $("#service").val(service);
+            selectService();
         }
     </script>
 @endsection

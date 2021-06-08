@@ -22,5 +22,6 @@
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/functions.js') }}"></script>
         @yield('scripts')
+        @yield('footer')
     </body>
 </html>

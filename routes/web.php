@@ -21,7 +21,12 @@ Route::middleware('guest')->group(function (){
     Route::get('rate', 'PagesController@showRate');
     Route::get('success', 'PagesController@showSuccess');
     Route::post('office/select', 'FeedbackController@selectOffice');
+    Route::get('service', 'PagesController@showService');
+    Route::post('service/select', 'FeedbackController@selectService');
     Route::post('submit', 'FeedbackController@submitFeedback');
+
+    Route::get('form', 'PagesController@showForm');
+    Route::post('submitForm', 'ClientController@submitClientRate');
 });
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
