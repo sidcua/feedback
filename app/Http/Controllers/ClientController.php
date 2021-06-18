@@ -12,6 +12,11 @@ class ClientController extends Controller
     public function submitClientRate(Request $request) {
         $validator = Validator::make($request->all(), [
             'client' => 'required',
+            'sex' => 'required',
+            'type' => 'required',
+            'institution' => 'required',
+            'transaction' => 'required',
+            'service' => 'required',
             'responsiveness' => 'required',
             'access' => 'required',
             'communication' => 'required',

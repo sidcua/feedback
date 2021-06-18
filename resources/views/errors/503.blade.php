@@ -70,14 +70,6 @@
         .thing2 > :last-child {
             margin-bottom: 0;
         }
-        .selectwidth {
-            /* width: 100px; */
-            text-overflow: ellipsis;
-        }
-        .selectwidth > option {
-            width: 100px;
-            text-overflow: wrap;
-        }
     </style>
 @endsection
 @section('content')
@@ -101,32 +93,16 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid" id="feedback-container">
+    <div class="container text-center" style="margin-top: 50px; margin-bottom: 100px;">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <h2>CHEDRO IX Client Satsifactory Survey</h1>
+                <h1>IS UNDER MAINTENANCE</h1>
+                <h3>We'll be right back soon.</h1>
+            </div>
+        </div>
     </div>
 @endsection
-@section('scripts')
-    <script>
-        $(document).ready(function(){
-            $("#feedback-container").hide();
-            $("#loader").show();
-            $("#feedback-container").load('/form', function(){
-                $("#loader").hide();
-                $("#feedback-container").show();
-            });
-        })
-
-        function office(office){
-            $("#office").val(office);
-            selectOffice();
-        }
-
-        function service(service){
-            $("#service").val(service);
-            selectService();
-        }
-    </script>
-@endsection
-
 @section('footer')
     <footer class="page-footer font-small blue pt-4">
 

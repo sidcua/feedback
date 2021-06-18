@@ -1,7 +1,7 @@
 <div class="row justify-content-center p-3">
     <div class="col-sm-10 col-md-10 text-center">
         <p class="h1">How do you feel regarding our service?</p>
-        <p class="h6">CHED Regiona IX Client Satisfactory Survey</p>
+        <p class="h6">CHED Regional IX Client Satisfactory Survey</p>
     </div>
     <div class="col-sm-6 col-md-6 text-center">
         <div id="submitFeedback-error" class="alert alert-danger collapse">
@@ -13,118 +13,14 @@
     {{csrf_field()}}
     <div class="row justify-content-center" style="margin-top: 50px;">
         <div class="col-lg-10">
-            <div class="form-group thing2" style="margin-bottom: 30px;">
-                <label for="exampleInputEmail1"><span class="h3">Name / Office / Organization <i></i></span></label>
-                <input type="text" name="client" class="form-control" aria-describedby="emailHelp" maxlength="100" placeholder="ex. Juan Dela Cruz">
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-lg-5">
-            <div class="form-group thing2" style="margin-bottom: 30px;">
-                <label for="exampleInputEmail1"><span class="h3">Sex <i></i></span></label>
-                <div class="d-flex justify-content-center">
-                    <select name="sex" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" placeholder="ex. Male">
-                        <option value="" selected>...</option>
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-5">
-            <div class="form-group thing2" style="margin-bottom: 30px;">
-                <label for="exampleInputEmail1"><span class="h3">Type of Client <i></i></span></label>
-                <div class="d-flex justify-content-center">
-                    <select name="type" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option value="" selected>...</option>
-                        <option value="Student">Student</option>
-                        <option value="Faculty">Faculty</option>
-                        <option value="Individual/Institution">Individual/Institution</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-lg-5">
-            <div class="form-group thing2" style="margin-bottom: 30px;">
-                <label for="exampleInputEmail1"><span class="h3">Type of Institution <i></i></span></label>
-                <div class="d-flex justify-content-center">
-                    <select name="institution" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option value="" selected>...</option>
-                        <option value="Private">Private</option>
-                        <option value="Public">Public</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-5">
-            <div class="form-group thing2" style="margin-bottom: 30px;">
-                <label for="exampleInputEmail1"><span class="h3">Type of Transaction <i></i></span></label>
-                <div class="d-flex justify-content-center">
-                    <select name="transaction" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                        <option value="" selected>...</option>
-                        <option value="G2C">Government to Citizen (G2C)</option>
-                        <option value="G2B">Government to Business (G2B)</option>
-                        <option value="G2B">Government to Government (G2B)</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <div class="form-group thing2" style="margin-bottom: 30px;">
-                <label for="exampleInputEmail1"><span class="h3">Please select the service availed of<i></i></span></label>
-                <!-- <div class="" style="margin-top: 30px;">
-                    <div class="col-sm-10 col-md-10 col-lg-10 d-flex justify-content-between">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input mr-3" type="radio" name="service" id="service1" value="Application for Certification, Authentication and Verification (C.A.V.) of Academic Records"/>
-                            <label class="form-check-label h6" for="service1">Application for Certification, Authentication and Verification (C.A.V.) of Academic Records</label>
-                        </div>
-                    </div><br>
-                    <div class="col-sm-10 col-md-10 col-lg-10 d-flex justify-content-between">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input mr-3" type="radio" name="service" id="service1" value="Application for Certification of Student Records and Other Relevant Doicuments"/>
-                            <label class="form-check-label h6" for="service1">Application for Certification of Student Records and Other Relevant Doicuments</label>
-                        </div>
-                    </div><br>
-                    <div class="col-sm-10 col-md-10 col-lg-10 d-flex justify-content-between">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input mr-3" type="radio" name="service" id="service1" value="Application for Increase in Tuition and Other School Fees (TOSF)"/>
-                            <label class="form-check-label h6" for="service1">Application for Increase in Tuition and Other School Fees (TOSF)</label>
-                        </div>
-                    </div><br>
-                </div> -->
-                <div class="d-flex justify-content-center">
-                    <select name="service" class="form-select form-select-lg mb-3 selectwidth" aria-label=".form-select-lg example">
-                        <option value="" selected>...</option>
-                        <option value="Application for Certification, Authentication and Verification (C.A.V.) of Academic Records">Application for Certification, Authentication and Verification (C.A.V.) of Academic Records</option>
-                        <option value="Application for Certification of Student Records and Other Relevant Doicuments">Application for Certification of Student Records and Other Relevant Doicuments</option>
-                        <option value="Application for Increase in Tuition and Other School Fees (TOSF)">Application for Increase in Tuition and Other School Fees (TOSF)</option>
-                        <option value="Application for Initial Permit (GP); Government Recognition (GR); Certificate of Program Compliance (COPC)">Application for Initial Permit (GP); Government Recognition (GR); Certificate of Program Compliance (COPC)</option>
-                        <option value="Application for Issuance of Special Orders (SOs)">Application for Issuance of Special Orders (SOs)</option>
-                        <option value="Application for National Service Training Program (NSTP) Serial Numbers">Application for National Service Training Program (NSTP) Serial Numbers</option>
-                        <option value="Application for Permit/Recognition/COPC = Phase 1">Application for Permit/Recognition/COPC = Phase 1</option>
-                        <option value="Application for Renewal Permit">Application for Renewal Permit</option>
-                        <option value="Application for Student Financial Assistance Programs (StuFAPS)">Application for Student Financial Assistance Programs (StuFAPS)</option>
-                        <option value="Filing of Complaints, Appeals or Motions for Reconsideration">Filing of Complaints, Appeals or Motions for Reconsideration</option>
-                        <option value="Request for Endorsement of Articles of Incorporation and By-Laws of New Private">Higher Education Institutions (PHEis) to SEC</option>
-                        <option value="Request for Payment of Financial Benefits for STUFAPs Grantees">Request for Payment of Financial Benefits for STUFAPs Grantees</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center" style="margin-top: 50px;">
-        <div class="mb-3">
-            <p class="h5 text-center text-danger">Please rate our service under each specific dimensions in scale of 1 to 5</p>
-            <p class="h5 text-center text-danger">5 = Very Sartisfied | 4 = Satisfied | 3 = Neither Satisfied/Dissatisfied | 2 = Dissatisfied | 1 = Very Dissatisfied</p><br>
-        </div>
-        <div class="col-lg-10">
             <div class="form-group thing" style="margin-bottom: 30px;">
-                <label for="exampleInputEmail1"><span class="h4"><span class="text-primary">Responsiveness:</span> How satisfied are you with the assistance and speed in which the service was delivered? (in person, by telephone, and/or via email) <i></i></span></label>
+                <label for="exampleInputEmail1"><span class="h3">Name / Office / Organization <i></i></span></label>
+                <input type="text" name="client" class="form-control" aria-describedby="emailHelp" maxlength="100">
+            </div>
+            <p class="h5 text-center text-danger">Please rate our service under each specific dimensions in scale to 1 to 5</p>
+            <p class="h5 text-center text-danger">5 = Very Sartisfied | 4 = Satisfied | 3 = Neither Satisfied/Dissatisfied | 2 = Dissatisfied | 1 = Very Dissatisfied</p><br>
+            <div class="form-group thing" style="margin-bottom: 30px;">
+                <label for="exampleInputEmail1"><span class="h3"><span class="text-primary">Responsiveness:</span> How satisfied are you with the assistance and speed in which the service was delivered? (in person, by telephone, and/or via email) <i></i></span></label>
                 <div class="d-flex justify-content-center" style="margin-top: 30px;">
                     <div class="col-sm-8 col-md-8 col-lg-8 d-flex justify-content-between">
                         <div class="form-check form-check-inline">
@@ -151,7 +47,7 @@
                 </div>
             </div>
             <div class="form-group thing" style="margin-bottom: 30px;">
-                <label for="exampleInputEmail1"><span class="h4"><span class="text-primary">Reliability (Quality):</span> How satisfied are you with the quality of advice, guidance, and accuracy of information/documents provided by our staff?<i></i></span></label>
+                <label for="exampleInputEmail1"><span class="h3"><span class="text-primary">Reliability (Quality):</span> How satisfied are you with the quality of advice, guidance, and accuracy of information/documents provided by our staff?<i></i></span></label>
                 <div class="d-flex justify-content-center" style="margin-top: 30px;">
                     <div class="col-sm-8 col-md-8 col-lg-8 d-flex justify-content-between">
                         <div class="form-check form-check-inline">
@@ -178,7 +74,7 @@
                 </div>
             </div>
             <div class="form-group thing" style="margin-bottom: 30px;">
-                <label for="exampleInputEmail1"><span class="h4"><span class="text-primary">Access and Facilities:</span> How satisfied are you with the provision of facilities in terms of cleanliness and comfort? (e.g. holding area, offices, etc.)<i></i></span></label>
+                <label for="exampleInputEmail1"><span class="h3"><span class="text-primary">Access and Facilities:</span> How satisfied are you with the provision of facilities in terms of cleanliness and comfort? (e.g. holding area, offices, etc.)<i></i></span></label>
                 <div class="d-flex justify-content-center" style="margin-top: 30px;">
                     <div class="col-sm-8 col-md-8 col-lg-8 d-flex justify-content-between">
                         <div class="form-check form-check-inline">
@@ -205,7 +101,7 @@
                 </div>
             </div>
             <div class="form-group thing" style="margin-bottom: 30px;">
-                <label for="exampleInputEmail1"><span class="h4"><span class="text-primary">Communication:</span> How satisfied are you with the communication of our staff? Was it clear, concise, and in an understandable language?<i></i></span></label>
+                <label for="exampleInputEmail1"><span class="h3"><span class="text-primary">Communication:</span> How satisfied are you with the communication of our staff? Was it clear, concise, and in an understandable language?<i></i></span></label>
                 <div class="d-flex justify-content-center" style="margin-top: 30px;">
                     <div class="col-sm-8 col-md-8 col-lg-8 d-flex justify-content-between">
                         <div class="form-check form-check-inline">
@@ -232,7 +128,7 @@
                 </div>
             </div>
             <div class="form-group thing" style="margin-bottom: 30px;">
-                <label for="exampleInputEmail1"><span class="h4"><span class="text-primary">Costs:</span> How satisfied are you with the  amount of your fees and cost given the quality of services provided?<i></i></span></label>
+                <label for="exampleInputEmail1"><span class="h3"><span class="text-primary">Costs:</span> How satisfied are you with the  amount of your fees and cost given the quality of services provided?<i></i></span></label>
                 <div class="d-flex justify-content-center" style="margin-top: 30px;">
                     <div class="col-sm-8 col-md-8 col-lg-8 d-flex justify-content-between">
                         <div class="form-check form-check-inline">
@@ -259,7 +155,7 @@
                 </div>
             </div>
             <div class="form-group thing" style="margin-bottom: 30px;">
-                <label for="exampleInputEmail1"><span class="h4"><span class="text-primary">Integrity:</span> How satisfied are you with the professionalism of our staff handling the services you have requested?<i></i></span></label>
+                <label for="exampleInputEmail1"><span class="h3"><span class="text-primary">Integrity:</span> How satisfied are you with the professionalism of our staff handling the services you have requested?<i></i></span></label>
                 <div class="d-flex justify-content-center" style="margin-top: 30px;">
                     <div class="col-sm-8 col-md-8 col-lg-8 d-flex justify-content-between">
                         <div class="form-check form-check-inline">
@@ -286,7 +182,7 @@
                 </div>
             </div>
             <div class="form-group thing" style="margin-bottom: 30px;">
-                <label for="exampleInputEmail1"><span class="h4"><span class="text-primary">Assurance:</span> How satisfied are you with the ability of our staff to meet your service needs?<i></i></span></label>
+                <label for="exampleInputEmail1"><span class="h3"><span class="text-primary">Assurance:</span> How satisfied are you with the ability of our staff to meet your service needs?<i></i></span></label>
                 <div class="d-flex justify-content-center" style="margin-top: 30px;">
                     <div class="col-sm-8 col-md-8 col-lg-8 d-flex justify-content-between">
                         <div class="form-check form-check-inline">
@@ -313,7 +209,7 @@
                 </div>
             </div>
             <div class="form-group thing" style="margin-bottom: 30px;">
-                <label for="exampleInputEmail1"><span class="h4"><span class="text-primary">Outcome:</span> How satisfied are you with the overall quality of services you received?<i></i></span></label>
+                <label for="exampleInputEmail1"><span class="h3"><span class="text-primary">Outcome:</span> How satisfied are you with the overall quality of services you received?<i></i></span></label>
                 <div class="d-flex justify-content-center" style="margin-top: 30px;">
                     <div class="col-sm-8 col-md-8 col-lg-8 d-flex justify-content-between">
                         <div class="form-check form-check-inline">

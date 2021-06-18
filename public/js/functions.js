@@ -284,6 +284,16 @@ function submitClientRate(){
 			$.each(response.error, function(key, value) {
 				if(key == 'client') {
 					$("#submitFeedback-error").append("Name / Office / Organization is required<br>");
+				} else if (key == 'sex') {
+					$("#submitFeedback-error").append("Sex is required<br>");
+				} else if (key == 'type') {
+					$("#submitFeedback-error").append("Type of Client is required<br>");
+				} else if (key == 'institution') {
+					$("#submitFeedback-error").append("Type of Institution is required<br>");
+				} else if (key == 'transaction') {
+					$("#submitFeedback-error").append("Type of Transaction is required<br>");
+				} else if (key == 'service') {
+					$("#submitFeedback-error").append("Please select the service availed<br>");
 				} else {
 					if (!please) {
 						$("#submitFeedback-error").append("Please rate " + key + ", ");
