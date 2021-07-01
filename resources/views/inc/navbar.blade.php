@@ -9,7 +9,7 @@
                 <a class="nav-link" href="/admin/dashboard">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/entity">Entities</a>
+                <a class="nav-link" href="/admin/report">Report</a>
             </li>
         </ul>
         <div class="navbar-nav ml-auto">

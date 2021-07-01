@@ -41,4 +41,8 @@ class PagesController extends Controller
     public function showForm() {
         return view('feedback.form');
     }
+
+    public function showReport() {
+        return view('feedback.admin.report');
+    }
 }

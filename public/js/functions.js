@@ -320,6 +320,7 @@ function submitClientRate(){
 				$("#feedback-container").load('/form', function (){
 					$("#loader").hide();
 					$("#feedback-container").show();});
+					$('html,body').scrollTop(0);
 			}, 4000)
 		}
 	})
@@ -332,4 +333,41 @@ function cancelForm() {
 		$("#loader").hide();
 		$("#feedback-container").show();
 	});
+}
+
+function listService() {
+	ajaxGET('/admin/report/listService', '', function (response){
+		$("#select-service").html('<option value="" selected>...</option>');
+		$("#select-service").html('<option value="0" selected>ALL SERVICES</option>');
+		$.each(response, function(key, value) {
+			$("#select-service").append('<option value=' + value.serviceID + ' selected>' + value.service + '</option>');
+		});
+		$("#select-service").append('<option value="" selected>...</option>');
+	})
+}
+
+function listFeedback(service) {
+	service = {'service': service};
+	clearReportTable();
+	ajaxGET('/admin/report/listFeedback', service, function (response) {
+		$("#tbl-report").html('');
+		$.each(response.list, function(key, value) {
+			$("#tbl-report").append('<tr><th scope="row">'+value.clientID+'</th><td>'+value.responsiveness+'</td><td>'+value.reliability+'</td><td>'+value.access+'</td><td>'+value.communication+'</td><td>'+value.cost+'</td><td>'+value.integrity+'</td><td>'+value.assurance+'</td><td>'+value.outcome+'</td></tr>');
+		});
+		$.each(response.mean, function(key, value) {
+			$("#tbl-report").append('<tr class="font-weight-bold"><th scope="row">MEAN</th><td>'+value.responsiveness+'</td><td>'+value.reliability+'</td><td>'+value.access+'</td><td>'+value.communication+'</td><td>'+value.cost+'</td><td>'+value.integrity+'</td><td>'+value.assurance+'</td><td>'+value.outcome+'</td></tr>');
+		});
+		$("#tbl-report").append('<tr class="font-weight-bold"><th scope="row">MEDIAN</th><td>'+response.median.responsiveness+'</td><td>'+response.median.reliability+'</td><td>'+response.median.access+'</td><td>'+response.median.communication+'</td><td>'+response.median.cost+'</td><td>'+response.median.integrity+'</td><td>'+response.median.assurance+'</td><td>'+response.median.outcome+'</td></tr>');
+		showReportTable();
+	});
+}
+
+function listService_form() {
+	ajaxGET('/listService', '', function (response){
+		$("#select-service-form").html('<option value="" selected>...</option>');
+		$.each(response, function(key, value) {
+			$("#select-service-form").append('<option value=' + value.serviceID + ' selected>' + value.service + '</option>');
+		});
+		$("#select-service-form").append('<option value="" selected>...</option>');
+	})
 }

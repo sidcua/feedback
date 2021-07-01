@@ -27,6 +27,7 @@ Route::middleware('guest')->group(function (){
 
     Route::get('form', 'PagesController@showForm');
     Route::post('submitForm', 'ClientController@submitClientRate');
+    Route::get('listService', 'ClientController@listService');
 });
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
@@ -49,6 +50,13 @@ Route::middleware('auth')->group(function (){
             Route::post('add', 'EntityController@addEntity');
             Route::post('delete', 'EntityController@deleteEntity');
             Route::post('edit', 'EntityController@editEntity');
+        });
+
+        //Report
+        Route::get('report', 'PagesController@showReport');
+        Route::prefix('report')->group(function (){
+            Route::get('listService', 'ReportController@listService');
+            Route::get('listFeedback', 'ReportController@listFeedback');
         });
     });
 });

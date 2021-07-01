@@ -1,30 +1,60 @@
 @extends('layouts.app')
-@section('title', 'Feedback')
+@section('title', 'Dashboard')
 @section('styles')
     {{-- <link rel='stylesheet' href='https://unpkg.com/emoji.css/dist/emoji.min.css'> --}}
 @endsection
 @section('content')
     @include('inc.navbar')
-    <div class="container">
+    <div class="container mt-5">
         <div class="row">
-            <div class="col-sm-12 col-md-12">
-                <div class="jumbotron">
-                    <h1 class="display-4 font-weight-bold" id="office-rating">----</h1>
-                    <p class="lead">CHEDRO IX Overall Rating</p>
-                    <hr class="my-4">
-                    <p></p>
-                    <a class="btn btn-primary btn-lg" href="#" role="button">View all feedbacks <span class="badge badge-light" id="total-feedback-badge"></span></a>
+            <div class="col-lg-12">
+                <div class="card text-center text-white bg-success mb-3">
+                    <div class="card-header">
+                        Client Satisfactory Dashboard
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title">Overall Rating</h1>
+                        <p class="card-text h2">99.9</p>
+                    </div>
                 </div>
             </div>
-            
         </div>
         <div class="row">
-            <div class="col-sm-6 col-md-6" id="by-office">
-                <div class="card">
+            <div class="col-lg-6">
+                <div class="card text-center text-white bg-primary mb-3">
+                    <div class="card-header">Header</div>
                     <div class="card-body">
-                        <h5 class="card-title font-weight-bold">---</h5>
-                        <p class="card-text">----</p>
-                        <a href="#" class="btn btn-primary">View Feedbacks</a>
+                    <h5 class="card-title">Primary card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card text-center text-white bg-secondary mb-3">
+                    <div class="card-header">Header</div>
+                    <div class="card-body">
+                    <h5 class="card-title">Primary card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card text-center text-white bg-warning mb-3">
+                    <div class="card-header">Header</div>
+                    <div class="card-body">
+                    <h5 class="card-title">Primary card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card text-center text-white bg-info mb-3">
+                    <div class="card-header">Header</div>
+                    <div class="card-body">
+                    <h5 class="card-title">Primary card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
                 </div>
             </div>

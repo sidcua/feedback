@@ -133,7 +133,7 @@
     <!--Copyright-->
     <div class="footer-copyright">
     <div class="footer-copyright text-center py-3">© 2021 Copyright:
-    <a href="feedback.chedro9.com"> feedback.chedro9.com</a>
+    <a href="/"> feedback.chedro9.com</a>
     </div>
     </div>
     <!--/.Copyright-->
