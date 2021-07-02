@@ -37,8 +37,9 @@ Route::middleware('auth')->group(function (){
         // Dashboard
         Route::get('dashboard', 'PagesController@showDashboard');
         Route::prefix('dashboard')->group(function(){
-            Route::get('overall', 'AdminController@overallRating');
-            Route::get('byOffice', 'AdminController@byOfficeRating');
+            Route::get('overallRating', 'AdminController@overallRating');
+            Route::get('byFactor', 'AdminController@byFactor');
+            Route::get('totalFeedback', 'AdminController@totalFeedback');
         });
         
         // Entity
