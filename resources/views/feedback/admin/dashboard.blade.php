@@ -14,7 +14,7 @@
                     </div>
                     <div class="card-body">
                         <h1 class="card-title">Overall Rating</h1>
-                        <p class="card-text h2">99.9</p>
+                        <p id="office-rating" class="card-text h2">---</p>
                     </div>
                 </div>
             </div>
@@ -22,39 +22,71 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="card text-center text-white bg-primary mb-3">
-                    <div class="card-header">Header</div>
+                    <div class="card-header">Responsiveness</div>
                     <div class="card-body">
-                    <h5 class="card-title">Primary card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 id="responsiveness" class="card-title">---</h5>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="card text-center text-white bg-secondary mb-3">
-                    <div class="card-header">Header</div>
+                <div class="card text-center text-white bg-primary mb-3">
+                    <div class="card-header">Reliability (Quality)</div>
                     <div class="card-body">
-                    <h5 class="card-title">Primary card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 id="reliability" class="card-title">---</h5>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-6">
-                <div class="card text-center text-white bg-warning mb-3">
-                    <div class="card-header">Header</div>
+                <div class="card text-center text-white bg-primary mb-3">
+                    <div class="card-header">Access and Facilities</div>
                     <div class="card-body">
-                    <h5 class="card-title">Primary card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 id="access" class="card-title">---</h5>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="card text-center text-white bg-info mb-3">
-                    <div class="card-header">Header</div>
+                <div class="card text-center text-white bg-primary mb-3">
+                    <div class="card-header">Communication</div>
                     <div class="card-body">
-                    <h5 class="card-title">Primary card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 id="communication" class="card-title">---</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card text-center text-white bg-primary mb-3">
+                    <div class="card-header">Costs</div>
+                    <div class="card-body">
+                    <h5 id="cost" class="card-title">---</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card text-center text-white bg-primary mb-3">
+                    <div class="card-header">Integrity</div>
+                    <div class="card-body">
+                    <h5 id="integrity" class="card-title">---</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card text-center text-white bg-primary mb-3">
+                    <div class="card-header">Assurance</div>
+                    <div class="card-body">
+                    <h5 id="assurance" class="card-title">---</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card text-center text-white bg-primary mb-3">
+                    <div class="card-header">Outcome</div>
+                    <div class="card-body">
+                    <h5 id="outcome" class="card-title">---</h5>
                     </div>
                 </div>
             </div>

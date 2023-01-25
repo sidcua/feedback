@@ -47,24 +47,27 @@
         <div class="row mt-3">
             <div class="col-md-4 h6">
                 Prepared by:
-                <br><br>
+                <br><br><br>
+                VICENTE A. REGALADO<br>
                 <u>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</u>
                 <br>
-                Technical Staff
+                Education Supervisor II
             </div>
             <div class="col-md-4 h6">
                 Reviewed by:
-                <br><br>
+                <br><br><br>
+                Engr. JOSEPH LOU C. STA. TERESA, MAN<br>
                 <u>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</u>
                 <br>
-                Chief
+                OIC - Chief Education Program Specialist
             </div>
             <div class="col-md-4 h6">
                 Approved by:
-                <br><br>
+                <br><br><br>
+                RODY P. GARCIA, Ed. D.<br>
                 <u>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</u>
                 <br>
-                Office Director
+                OIC - Director IV
             </div>
         </div>
     </div>

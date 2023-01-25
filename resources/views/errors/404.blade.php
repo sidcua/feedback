@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Client Satisfactory')
+@section('title', 'Client Satsifacory')
 @section('styles')
     {{-- <link rel='stylesheet' href='https://unpkg.com/emoji.css/dist/emoji.min.css'> --}}
     <!-- Font Awesome -->
@@ -70,14 +70,6 @@
         .thing2 > :last-child {
             margin-bottom: 0;
         }
-        .selectwidth {
-            /* width: 100px; */
-            text-overflow: ellipsis;
-        }
-        .selectwidth > option {
-            width: 100px;
-            text-overflow: wrap;
-        }
     </style>
 @endsection
 @section('content')
@@ -101,39 +93,25 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid" id="feedback-container">
+    <div class="container text-center" style="margin-top: 100px; margin-bottom: 150px;">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <h2>Ooops...</h1>
+                <h3>It seems you are lost</h1>
+                <script>
+                    document.write('<a href="javascript:history.back()" class="link-primary h4">Go Back</a>');
+                </script>
+            </div>
+        </div>
     </div>
 @endsection
-@section('scripts')
-    <script>
-        $(document).ready(function(){
-            $("#feedback-container").hide();
-            $("#loader").show();
-            $("#feedback-container").load('/form', function(){
-                $("#loader").hide();
-                $("#feedback-container").show();
-            });
-        })
-
-        function office(office){
-            $("#office").val(office);
-            selectOffice();
-        }
-
-        function service(service){
-            $("#service").val(service);
-            selectService();
-        }
-    </script>
-@endsection
-
 @section('footer')
     <footer class="page-footer font-small blue pt-4">
 
     <!--Copyright-->
     <div class="footer-copyright">
     <div class="footer-copyright text-center py-3">© 2023 Copyright:
-    <a href="/"> feedback.chedro9.com</a>
+    <a href="feedback.chedro9.com"> feedback.chedro9.com</a>
     </div>
     </div>
     <!--/.Copyright-->

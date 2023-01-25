@@ -155,25 +155,21 @@ function cancelService() {
 }
 
 function overallRating() {
-	ajaxGET('/admin/dashboard/overall','', function(response){
-		$("#office-rating").text(response.rate);
-		$("#total-feedback-badge").text(response.count);
+	ajaxGET('/admin/dashboard/overallRating','', function(response){
+		$("#office-rating").text(response);
 	})
 }
 
 function byOfficeRating() {
-	ajaxGET('/admin/dashboard/byOffice', '', function(response) {
-		$("#by-office").html('');
-		$.each(response, function(key,value){
-			$("#by-office").append('<div class="card">' + 
-					'<div class="card-body">' +
-                        '<h5 class="card-title font-weight-bold">' + value.rate + '</h5>' +
-                        '<p class="card-text">' + value.office + '</p>' +
-                        '<a href="#" class="btn btn-primary">View Feedbacks <span class="badge badge-light">' + value.count + '</span></a>' +
-                    '</div>' +
-                '</div>');
-		})
-		
+	ajaxGET('/admin/dashboard/byFactor','', function(response) {
+		$("#responsiveness").text(response.responsiveness);
+		$("#reliability").text(response.reliability);
+		$("#access").text(response.access);
+		$("#communication").text(response.communication);
+		$("#cost").text(response.cost);
+		$("#integrity").text(response.integrity);
+		$("#assurance").text(response.assurance);
+		$("#outcome").text(response.outcome);
 	})
 }
 
@@ -275,7 +271,6 @@ function editEntity(){
 function submitClientRate(){
 	loadSubmitButton();
 	var form = $("#client-form").serialize();
-	console.log(form);
 	ajaxPOST('/submitForm', form, function(response){
 		if (response.status) {
 			$("#submitFeedback-error").html('');
@@ -351,14 +346,18 @@ function listFeedback(service) {
 	clearReportTable();
 	ajaxGET('/admin/report/listFeedback', service, function (response) {
 		$("#tbl-report").html('');
-		$.each(response.list, function(key, value) {
-			$("#tbl-report").append('<tr><th scope="row">'+value.clientID+'</th><td>'+value.responsiveness+'</td><td>'+value.reliability+'</td><td>'+value.access+'</td><td>'+value.communication+'</td><td>'+value.cost+'</td><td>'+value.integrity+'</td><td>'+value.assurance+'</td><td>'+value.outcome+'</td></tr>');
-		});
-		$.each(response.mean, function(key, value) {
-			$("#tbl-report").append('<tr class="font-weight-bold"><th scope="row">MEAN</th><td>'+value.responsiveness+'</td><td>'+value.reliability+'</td><td>'+value.access+'</td><td>'+value.communication+'</td><td>'+value.cost+'</td><td>'+value.integrity+'</td><td>'+value.assurance+'</td><td>'+value.outcome+'</td></tr>');
-		});
-		$("#tbl-report").append('<tr class="font-weight-bold"><th scope="row">MEDIAN</th><td>'+response.median.responsiveness+'</td><td>'+response.median.reliability+'</td><td>'+response.median.access+'</td><td>'+response.median.communication+'</td><td>'+response.median.cost+'</td><td>'+response.median.integrity+'</td><td>'+response.median.assurance+'</td><td>'+response.median.outcome+'</td></tr>');
-		showReportTable();
+		if (response.list) {
+			$.each(response.list, function(key, value) {
+				$("#tbl-report").append('<tr><th scope="row">'+value.clientID+'</th><td>'+value.responsiveness+'</td><td>'+value.reliability+'</td><td>'+value.access+'</td><td>'+value.communication+'</td><td>'+value.cost+'</td><td>'+value.integrity+'</td><td>'+value.assurance+'</td><td>'+value.outcome+'</td></tr>');
+			});
+			$.each(response.mean, function(key, value) {
+				$("#tbl-report").append('<tr class="font-weight-bold"><th scope="row">MEAN</th><td>'+value.responsiveness+'</td><td>'+value.reliability+'</td><td>'+value.access+'</td><td>'+value.communication+'</td><td>'+value.cost+'</td><td>'+value.integrity+'</td><td>'+value.assurance+'</td><td>'+value.outcome+'</td></tr>');
+			});
+			$("#tbl-report").append('<tr class="font-weight-bold"><th scope="row">MEDIAN</th><td>'+response.median.responsiveness+'</td><td>'+response.median.reliability+'</td><td>'+response.median.access+'</td><td>'+response.median.communication+'</td><td>'+response.median.cost+'</td><td>'+response.median.integrity+'</td><td>'+response.median.assurance+'</td><td>'+response.median.outcome+'</td></tr>');
+			showReportTable();
+		} else {
+			$("#tbl-report").html('<tr><td colspan="8">test</td></tr>')
+		}
 	});
 }
 
