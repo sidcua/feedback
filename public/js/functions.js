@@ -346,17 +346,18 @@ function listFeedback(service) {
 	clearReportTable();
 	ajaxGET('/admin/report/listFeedback', service, function (response) {
 		$("#tbl-report").html('');
-		if (response.list) {
+		if (response.countList) {
 			$.each(response.list, function(key, value) {
-				$("#tbl-report").append('<tr><th scope="row">'+value.clientID+'</th><td>'+value.responsiveness+'</td><td>'+value.reliability+'</td><td>'+value.access+'</td><td>'+value.communication+'</td><td>'+value.cost+'</td><td>'+value.integrity+'</td><td>'+value.assurance+'</td><td>'+value.outcome+'</td></tr>');
+				$("#tbl-report").append('<tr><th scope="row">'+ (value.client ? value.client : "...") +'</th><td style="text-align: center;">'+value.responsiveness+'</td><td style="text-align: center;">'+value.reliability+'</td><td style="text-align: center;">'+value.access+'</td><td style="text-align: center;">'+value.communication+'</td><td style="text-align: center;">'+value.cost+'</td><td style="text-align: center;">'+value.integrity+'</td><td style="text-align: center;">'+value.assurance+'</td><td style="text-align: center;">'+value.outcome+'</td></tr>');
 			});
 			$.each(response.mean, function(key, value) {
-				$("#tbl-report").append('<tr class="font-weight-bold"><th scope="row">MEAN</th><td>'+value.responsiveness+'</td><td>'+value.reliability+'</td><td>'+value.access+'</td><td>'+value.communication+'</td><td>'+value.cost+'</td><td>'+value.integrity+'</td><td>'+value.assurance+'</td><td>'+value.outcome+'</td></tr>');
+				$("#tbl-report").append('<tr class="font-weight-bold text-white bg-primary"><th scope="row">MEAN</th><td style="text-align: center;">'+value.responsiveness+'</td><td style="text-align: center;">'+value.reliability+'</td><td style="text-align: center;">'+value.access+'</td><td style="text-align: center;">'+value.communication+'</td><td style="text-align: center;">'+value.cost+'</td><td style="text-align: center;">'+value.integrity+'</td><td style="text-align: center;">'+value.assurance+'</td><td style="text-align: center;">'+value.outcome+'</td></tr>');
 			});
-			$("#tbl-report").append('<tr class="font-weight-bold"><th scope="row">MEDIAN</th><td>'+response.median.responsiveness+'</td><td>'+response.median.reliability+'</td><td>'+response.median.access+'</td><td>'+response.median.communication+'</td><td>'+response.median.cost+'</td><td>'+response.median.integrity+'</td><td>'+response.median.assurance+'</td><td>'+response.median.outcome+'</td></tr>');
+			$("#tbl-report").append('<tr class="font-weight-bold text-white bg-info"><th scope="row">MEDIAN</th><td style="text-align: center;">'+response.median.responsiveness+'</td><td style="text-align: center;">'+response.median.reliability+'</td><td style="text-align: center;">'+response.median.access+'</td><td style="text-align: center;">'+response.median.communication+'</td><td style="text-align: center;">'+response.median.cost+'</td><td style="text-align: center;">'+response.median.integrity+'</td><td style="text-align: center;">'+response.median.assurance+'</td><td style="text-align: center;">'+response.median.outcome+'</td></tr>');
 			showReportTable();
 		} else {
-			$("#tbl-report").html('<tr><td colspan="8">test</td></tr>')
+			$("#tbl-report").html('<tr><td colspan=9 class="text-center"><p class="h6 font-italic">No feedbacks on this service</p></td></tr>');
+			showReportTable();
 		}
 	});
 }

@@ -12,6 +12,7 @@ class ReportController extends Controller
     public function listFeedback(Request $request) {
         if (!$request->service) {
             $feedbacks['list'] = Client::all();
+            $feedbacks['countList'] = $feedbacks['list']->count();
             $feedbacks['mean'] = DB::select("SELECT AVG(responsiveness) AS responsiveness, AVG(reliability) AS reliability, AVG(access) AS access, AVG(communication) AS communication, AVG(cost) AS cost, AVG(integrity) AS integrity, AVG(assurance) AS assurance, AVG(outcome) AS outcome FROM clients");
             $feedbacks['median']['responsiveness'] = Client::select('responsiveness')->get()->median('responsiveness');
             $feedbacks['median']['reliability'] = Client::select('reliability')->get()->median('reliability');
@@ -23,7 +24,8 @@ class ReportController extends Controller
             $feedbacks['median']['outcome'] = Client::select('outcome')->get()->median('outcome');
         } else {
             $feedbacks['list'] = Client::where('service', $request->service)->get();
-            $feedbacks['mean'] = DB::select("SELECT AVG(responsiveness) AS responsiveness, AVG(reliability) AS reliability, AVG(access) AS access, AVG(communication) AS communication, AVG(cost) AS cost, AVG(integrity) AS integrity, AVG(assurance) AS assurance, AVG(outcome) AS outcome FROM clients WHERE service = $request->service");
+            $feedbacks['countList'] = $feedbacks['list']->count();
+            $feedbacks['mean'] = DB::select("SELECT round(AVG(responsiveness), 2) AS responsiveness, round(AVG(reliability), 2) AS reliability, round(AVG(access), 2) AS access, round(AVG(communication), 2) AS communication, round(AVG(cost), 2) AS cost, round(AVG(integrity), 2) AS integrity, round(AVG(assurance), 2) AS assurance, round(AVG(outcome), 2) AS outcome FROM clients WHERE service = $request->service");
             $feedbacks['median']['responsiveness'] = Client::select('responsiveness')->where('service', $request->service)->get()->median('responsiveness');
             $feedbacks['median']['reliability'] = Client::select('reliability')->where('service', $request->service)->get()->median('reliability');
             $feedbacks['median']['access'] = Client::select('access')->where('service', $request->service)->get()->median('access');

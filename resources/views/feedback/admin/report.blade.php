@@ -9,19 +9,24 @@
         <div class="row">
             <div class="col-md-12">
                 <p class="h5">CHED Regional Office IX</p>
-                <div class="form-group thing2" style="margin-bottom: 30px;">
+                <div class="form-group thing2 mb-2">
                     <label for="exampleInputEmail1"><span class="h5">Service: <i></i></span></label>
                     <select name="service" id="select-service" class="form-select form-select-lg mb-3 " aria-label=".form-select-lg example" onchange="listFeedback(this.value);">
                     </select>
                 </div>
             </div>
         </div>
+        <div class="row mb-3">
+            <div class="col-md-12 d-flex justify-content-end">
+                <button type="button" class="btn btn-primary" onclick="print();">Print Report</button>
+            </div>
+        </div>
         <div class="row mt-1">
             <div class="col-md-12">
                 <table class="table table-bordered">
                     <thead>
-                        <tr>
-                            <th scope="col">Client #</th>
+                        <tr style="text-align: center;">
+                            <th scope="col">Client</th>
                             <th scope="col">Responsiveness</th>
                             <th scope="col">Reliability (Quality)</th>
                             <th scope="col">Access & Facilities</th>
@@ -33,6 +38,9 @@
                         </tr>
                     </thead>
                     <tbody id="tbl-report">
+                        <tr>
+                            <td colspan=9 class="text-center"><p class="h6 font-italic">Please select a service</p></td>
+                        </tr>
                     </tbody>
                 </table>
                 <div class="container collapse mt-1" id="loader">
